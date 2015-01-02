@@ -10,4 +10,11 @@ $ds = new DBObjectSaver(array(
 	"prefix" => "CarFanatics" // a prefix unique for your app/project
 	));
 
-$ds->persons["Susanne"] = new Character("Susanne");
+if (count($ds->characters) === 0) {
+  // no monsters so let us create some
+  $ds->characters[] = new Character("Gremlin");
+  $ds->characters[] = new Character("Joker".rand(77,99));
+}
+
+//Prints out current carracters in the db
+var_dump($ds->characters);
