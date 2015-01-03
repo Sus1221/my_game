@@ -10,11 +10,16 @@ $ds = new DBObjectSaver(array(
 	"prefix" => "CarFanatics" // a prefix unique for your app/project
 	));
 
-if (count($ds->characters) === 0) {
-  // no monsters so let us create some
-  $ds->characters[] = new Character("Gremlin");
-  $ds->characters[] = new Character("Joker".rand(77,99));
+if (count($ds->bots) === 0) {
+
+	$list = array("grandParent", "middleAger", "teenAger", "toddler");
+	$randomClass = $list[array_rand($list, 1)];
+
+	$ds->bots[] = new $randomClass("Jack Racer".rand(1,1000));
+	$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
 }
 
 //Prints out current carracters in the db
-var_dump($ds->characters);
+var_dump($ds->bots);
+
+

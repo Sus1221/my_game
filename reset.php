@@ -15,8 +15,7 @@ $ds = new DBObjectSaver(array(
 
 
 if (isset($_REQUEST["reset"])) {
-  //unset monsters, heroes and story from $ds
-  unset($ds->characters);
+  unset($ds->bots);
 }
 
-/*echo(json_encode(true));*/
+echo(json_encode(true));
