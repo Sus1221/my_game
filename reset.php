@@ -16,6 +16,7 @@ $ds = new DBObjectSaver(array(
 
 if (isset($_REQUEST["reset"])) {
   unset($ds->bots);
+  unset($ds->humanName);
 }
 
 echo(json_encode(true));
