@@ -33,15 +33,19 @@ $(function() {
   function sendHumanInfo(name, cl) {
     console.log("sendHumanInfo log",name,cl);
     $.ajax({
+      type: 'post',
       url: "connect.php",
       dataType: "json",
       data: {
         player_name: name,
         player_class: cl
       },
-      success: function() {console.log("Name and class of sendHumanInfo success:", name, cl)},
-      error: function() {console.log("Error in the sendHumanInfo function")}
-
+      success: function() {
+        console.log("Name and class of sendHumanInfo success:", name, cl)
+      },
+      error: function() {
+        console.log("Error in the sendHumanInfo function", data.responseText)
+      }
     });
   }
 

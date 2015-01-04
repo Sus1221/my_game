@@ -10,15 +10,19 @@ $ds = new DBObjectSaver(array(
 	"prefix" => "CarFanatics" // a prefix unique for your app/project
 	));
 
-//Creating human player off of the data he/she entered
+	$player_name = $_POST["player_name"];
+
+//Creating human player based on the data he/she entered
 if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 
 	$humanName = $_REQUEST["player_name"];
-	$humanClass = $_REQUEST["player_class"]
+	$humanClass = $_REQUEST["player_class"];
 
-	&$ds->human = new $humanClass($humanName);
-	var_dump($ds->human);
+	if (!count($ds->human)) {
+		$human = new $humanClass($humanName);
+		$ds->human[] = $human;
 	}
+}
 
 //Creating two bots if there aren't any
 if (count($ds->bots) === 0) {
@@ -37,4 +41,4 @@ if (count($ds->bots) === 0) {
 
 //Prints out current carracters in the db
 var_dump($ds->bots);
-
+var_dump($ds->human);
