@@ -36,7 +36,7 @@ $(function() {
 
 //Send the name and the player-type chosen by the human to the db
   function sendHumanInfo(name, cl) {
-    console.log("sendHumanInfo log", name,cl);
+    console.log("1sendHumanInfo log", name,cl);
     $.ajax({
       url: "create.php",
       dataType: "json",
@@ -49,7 +49,7 @@ $(function() {
         challengeOffer(name, cl);
       },
       error: function(data) {
-        console.log("Error in the sendHumanInfo function", data);
+        console.log("Error in the sendHumanInfo function", data.responseText);
       }
     });
   }
@@ -57,7 +57,44 @@ $(function() {
   function challengeOffer(name,cl) {
     console.log("This is the console log from challengeOffer", name, cl);
     $(".messageBox").show();
-    $(".messageBox").append("Hello", name, "You are now registered as a",cl);
+    $(".messageBox").append("Hello ", name, ". You are now registered as a ",cl, ". These are your strength levels: ");
+
+    $.ajax({
+      url: "create.php",
+      dataType: "json",
+      data: {
+        challenge: 1,
+      },
+      success: function(data) {
+        console.log("Data from the success of challengeOffer: ", data);
+        $(".messageBox").append(data);
+      },
+      error: function(data) {
+        console.log("Data from the error of challengeOffer: ", data);
+      }
+    });
+
+    $(".messageBox").append("You are now offered to do this challenge: <br>");
+
+    $.ajax({
+      url: "challenge.php",
+      dataType: "json",
+      data: {
+        challenge: 1,
+      },
+      success: function(data) {
+        console.log("Data from the success of challengeOffer: ", data);
+        $(".messageBox").append(data);
+      },
+      error: function(data) {
+        console.log("Data from the error of challengeOffer: ", data);
+      }
+    });
+
+
+
+    $(".messageBox").append("You either accept or change challenge. A change will cost you 5 success-points.");
+
 
   }
 

@@ -17,10 +17,10 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 	$humanName = $_REQUEST["player_name"];
 	$humanClass = $_REQUEST["player_class"];
 
-	if (!count($ds->human[0])) {
+	if (count($ds->human[0]) === 0) {
 		$ds->human[] = new $humanClass($humanName);
 		$human = &$ds->human[0];
-		echo(json_encode($human);
+		echo(json_encode($human = &$ds->human[0]->name));
 	} else {
 		$human = &$ds->human[0];
 	}
@@ -30,6 +30,7 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 if (count($ds->bots) === 0) {
 
 	$list = array("grandParent", "middleAger", "teenAger", "toddler");
+	$human = &$ds->human[0];
 	$randomClass = get_class($human);
 
 	//If the randomed class is the same as the human's - randomize it again
@@ -41,12 +42,22 @@ if (count($ds->bots) === 0) {
 	$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
 }
 
-/*if (isset($_REQUEST[""])) {
 
 
 
-}*/
+$human = &$ds->human[0];
 
-//Prints out current caracters in the db
-echo($ds->bots);
-echo($ds->human[0]);
+$human_val_now = array(
+	"name" => $human->name,
+	"handling" => $human->handling, 
+	"speed" => $human->speed, 
+	"persistance" => $human->persistance,
+	"hands_on" => $human->hands_on,
+	"success" => $human->success
+	);
+//Echos humans value right now
+//Working!
+/*echo(json_encode($human_val_now));
+echo(json_encode($ds->bots[0]->name));*/
+
+

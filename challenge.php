@@ -24,11 +24,12 @@ $challenges = new Array();
 $challenge = json_decode($ch1);
 var_dump("ch1".$ch1);
 
+if (isset($_REQUEST["challenge"]) {
+	echo("Yohuu");
+}
 
 
 
 
 
-
-//json_decode($json_data, true) turns json into associative arrays
 $challenge = json_decode($challenge_data, true);
