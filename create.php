@@ -20,7 +20,16 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 	if (count($ds->human[0]) === 0) {
 		$ds->human[] = new $humanClass($humanName);
 		$human = &$ds->human[0];
-		echo(json_encode($human = &$ds->human[0]->name));
+		$human_val_now = array(
+			"name" => $human->name,
+			"handling" => $human->handling, 
+			"speed" => $human->speed, 
+			"persistance" => $human->persistance,
+			"hands_on" => $human->hands_on,
+			"success" => $human->success
+	);
+		echo(json_encode($human_val_now));
+		/*echo(json_encode($human = &$ds->human[0]));*/
 	} else {
 		$human = &$ds->human[0];
 	}
@@ -45,19 +54,10 @@ if (count($ds->bots) === 0) {
 
 
 
-$human = &$ds->human[0];
 
-$human_val_now = array(
-	"name" => $human->name,
-	"handling" => $human->handling, 
-	"speed" => $human->speed, 
-	"persistance" => $human->persistance,
-	"hands_on" => $human->hands_on,
-	"success" => $human->success
-	);
+
 //Echos humans value right now
 //Working!
 /*echo(json_encode($human_val_now));
-echo(json_encode($ds->bots[0]->name));*/
-
-
+echo(json_encode($ds->bots[0]->name));
+*/

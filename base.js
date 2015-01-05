@@ -46,7 +46,10 @@ $(function() {
       },
       success: function(data) {
         console.log("Name and class of sendHumanInfo success:", data);
-        challengeOffer(name, cl);
+        for(var i in data) {
+          console.log("Looping the data: ", data[i]);
+        }
+        //challengeOffer(name, cl);
       },
       error: function(data) {
         console.log("Error in the sendHumanInfo function", data.responseText);
