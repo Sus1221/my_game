@@ -13,6 +13,7 @@ $(function() {
       },
       success: function(data) {
           console.log("Game reset-ed!");
+          $(".messageBox").hide();
       },
       error: function(data) {
         console.log("Something wrong in the reset process!");
@@ -46,15 +47,22 @@ $(function() {
       },
       success: function(data) {
         console.log("Name and class of sendHumanInfo success:", data);
-        for(var i in data) {
-          console.log("Looping the data: ", data[i]);
-        }
+        printInfo(data);
         //challengeOffer(name, cl);
       },
       error: function(data) {
         console.log("Error in the sendHumanInfo function", data.responseText);
       }
     });
+  }
+
+  function printInfo(data) {
+    $(".messageBox").show();
+    for(var key in data) {
+          if(data.hasOwnProperty(key)) {
+            $(".messageBox").append(key + " -> " +data[key]);
+          }
+    }
   }
 
   function challengeOffer(name,cl) {
