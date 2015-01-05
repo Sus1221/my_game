@@ -46,10 +46,10 @@ $(function() {
       },
       success: function(data) {
         console.log("Name and class of sendHumanInfo success:", data);
-        challengeOffer(name,cl);
+        challengeOffer(name, cl);
       },
-      error: function() {
-        console.log("Error in the sendHumanInfo function");
+      error: function(data) {
+        console.log("Error in the sendHumanInfo function", data);
       }
     });
   }

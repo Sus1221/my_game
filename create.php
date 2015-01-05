@@ -20,7 +20,7 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 	if (!count($ds->human[0])) {
 		$ds->human[] = new $humanClass($humanName);
 		$human = &$ds->human[0];
-		echo("You've created a new person called".$humanName."with class ".$humanClass);
+		echo(json_encode($human);
 	} else {
 		$human = &$ds->human[0];
 	}
@@ -48,5 +48,5 @@ if (count($ds->bots) === 0) {
 }*/
 
 //Prints out current caracters in the db
-var_dump($ds->bots);
-var_dump($ds->human[0]);
+echo($ds->bots);
+echo($ds->human[0]);
