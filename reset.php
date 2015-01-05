@@ -18,5 +18,3 @@ if (isset($_REQUEST["reset"])) {
   unset($ds->bots);
   unset($ds->human);
 }
-
-echo(json_encode(true));

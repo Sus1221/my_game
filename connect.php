@@ -10,7 +10,6 @@ $ds = new DBObjectSaver(array(
 	"prefix" => "CarFanatics" // a prefix unique for your app/project
 	));
 
-	$player_name = $_POST["player_name"];
 
 //Creating human player based on the data he/she entered
 if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
@@ -19,8 +18,10 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 	$humanClass = $_REQUEST["player_class"];
 
 	if (!count($ds->human)) {
-		$human = new $humanClass($humanName);
-		$ds->human[] = $human;
+		$ds->human[] = new $humanClass($humanName);
+		$human = &$ds->human[0];
+	} else {
+		$human = &$ds->human[0];
 	}
 }
 
@@ -28,10 +29,10 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 if (count($ds->bots) === 0) {
 
 	$list = array("grandParent", "middleAger", "teenAger", "toddler");
-	$randomClass = $list[array_rand($list, 1)];
+	$randomClass = get_class($human);
 
 	//If the randomed class is the same as the human's - randomize it again
-	if ($randomClass == $ds->humanClass) {
+	while ($randomClass == get_class($human)) {
 		$randomClass = $list[array_rand($list, 1)];
 	}
 
@@ -39,6 +40,6 @@ if (count($ds->bots) === 0) {
 	$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
 }
 
-//Prints out current carracters in the db
+//Prints out current caracters in the db
 var_dump($ds->bots);
-var_dump($ds->human);
+var_dump($human);
