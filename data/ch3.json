@@ -1,0 +1,12 @@
+{
+  "id" : 3,
+  "name" : "Parking at a underground carpark",
+  "description" : "Driving into the underground, finding a available spot without damaging your car. Or the buildning...",
+  "skills" : {		
+		"handling" : 60,
+		"speed" : 0,
+		"persistance" : 10,
+		"hands-on" : 30		
+	}
+
+}

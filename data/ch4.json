@@ -1,0 +1,12 @@
+{
+  "id" : 4,
+  "name" : "Deliver a package",
+  "description" : "",
+  "skills" : {		
+		"handling" : 0,
+		"speed" : 40,
+		"persistance" : 80,
+		"hands-on" : 60		
+	}
+
+}

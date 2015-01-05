@@ -1,0 +1,12 @@
+{
+  "id" : 0,
+  "name" : "Cruising",
+  "description" : "Cruising through the narrow streets of the city center without making a scratch!",
+  "skills" : {		
+		"handling" : 80,
+		"speed" : 0,
+		"persistance" : 50,
+		"hands-on" : 10		
+	}
+
+}

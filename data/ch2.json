@@ -1,0 +1,12 @@
+{
+  "id" : 2,
+  "name" : "Parallel parking",
+  "description" : "Squeeze your car into a tight free spot",
+  "skills" : {		
+		"handling" : 80,
+		"speed" : 20,
+		"persistance" : 0,
+		"hands-on" : 20		
+	}
+
+}

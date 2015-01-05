@@ -17,9 +17,10 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 	$humanName = $_REQUEST["player_name"];
 	$humanClass = $_REQUEST["player_class"];
 
-	if (!count($ds->human)) {
+	if (!count($ds->human[0])) {
 		$ds->human[] = new $humanClass($humanName);
 		$human = &$ds->human[0];
+		echo("You've created a new person called".$humanName."with class ".$humanClass);
 	} else {
 		$human = &$ds->human[0];
 	}
@@ -40,6 +41,12 @@ if (count($ds->bots) === 0) {
 	$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
 }
 
+/*if (isset($_REQUEST[""])) {
+
+
+
+}*/
+
 //Prints out current caracters in the db
 var_dump($ds->bots);
-var_dump($human);
+var_dump($ds->human[0]);

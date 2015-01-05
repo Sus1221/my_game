@@ -1,0 +1,12 @@
+{
+  "id" : 1,
+  "name" : "Dragrace",
+  "description" : "Fastest over a distance of 600 mts at the old air field wins!",
+  "skills" : {		
+		"handling" : 0,
+		"speed" : 80,
+		"persistance" : 0,
+		"hands-on" : 30			
+	}
+
+}
