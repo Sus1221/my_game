@@ -13,7 +13,9 @@ $ds = new DBObjectSaver(array(
   "prefix" => "CarFanatics"
 ));
 
-	public function makeItems() {
+echo($ds->items[0]->skills);
+
+if (count($ds->items) === 0) {
 		$ds->items[] = new Item(
 		    "gps",
 		  array(
@@ -109,4 +111,4 @@ $ds = new DBObjectSaver(array(
 		    "hands_on" => 0
 		  )
 		);
-	}
+}

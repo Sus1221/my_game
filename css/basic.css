@@ -6,6 +6,7 @@ header {
 
 form {
 	margin: 20px;
+	font-size: 20px;
 }
 
 input, select, button {
@@ -14,4 +15,9 @@ input, select, button {
 
 .messageBox {
 	margin: 10px;
+}
+
+h1 {
+	display: block;
+	font-size: 20px;
 }

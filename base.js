@@ -34,7 +34,7 @@ $(function() {
             $("#startForm").hide();
 
             return false;
-        });
+  });
 
 //Send the name and the player-type chosen by the human to the db
   function sendHumanInfo(name, cl) {
@@ -69,48 +69,77 @@ $(function() {
   }
 
 function challengeOffer(name,cl) {
-
-    $.ajax({
+  $.ajax({
       url: "challenge.php",
       dataType: "json",
       data: {
         challenge: 1,
       },
       success: function(data) {
+        $(".messageBox").append("You either accept or change the challenge below! A random change will cost you 5 success-points.<br>"+
+                                "You are now offered to do this challenge: <br>"+
+                                "<h1>"+data.name+"</h1>"+
+                                 data.description,"<br>"+
+                                "<button class = 'acceptCh'>Accept</button><button class='randomCh'>Random change</button>");
         console.log("Data from the success of challengeOffer: ", data);
-        $(".messageBox").append(data);
+          
       },
       error: function(data) {
         console.log("Data from the error of challengeOffer: ", data, data.responseText);
       }
-    });
-
-    $(".messageBox").append("You are now offered to do this challenge: <br>");
-
-    
-
-    $(".messageBox").append("You either accept or change challenge. A random change will cost you 5 success-points.<br>",
-                            "<button class = 'acceptCh'>Accept</button><button class='randomCh'>Random change</button>");
-    /*printEnemies();*/
+  });
+}
 
 
-  }
+$("body").on('click', ".acceptCh", function() {
+  console.log("accepted");
+  $(".messageBox").html("");
+  recieveItem();
+});
 
-  function printEnemies(data) {
-    $('.messageBox').append("You have two competitors in this game: <br>");
-        $.ajax({
-      url: "create.php",
+$("body").on('click', ".randomCh", (function() {
+  console.log("randomch click");
+  $.ajax({
+      url: "challenge.php",
       dataType: "json",
       data: {
-        enemies: 1
+        challengeChange: 1,
       },
       success: function(data) {
-        console.log("data of print success:", data.responseText);
+        $(".messageBox").html("This change cost you 5 success-points. <br> Your new challange is: " +
+                              "<h1>"+data.name+"</h1>"+
+                              data.description,"<br>"+
+                              "<button id='carry_on'>Continue</button>"
+                              );
+        console.log("Data from the success of challengeOffer: ", data);
+        recieveItem();
       },
       error: function(data) {
-        console.log("Error in the printEnemies function", data.responseText);
+        console.log("Data from the error of challengeOffer: ", data, data.responseText);
       }
-    });
+  });
+}));
+
+function recieveItem() {
+
+}
+
+  function printEnemies(data){
+    console.log("CL printEnemies",data);
+    $('.messageBox').append("You have two competitors in this game: <br>");
+      $.ajax({
+        url: "create.php",
+        dataType: "json",
+        data: {
+          enemies: 1
+        },
+        success: function(data) {
+          console.log("data of printEnemies success:", data);
+        },
+        error: function(data) {
+          console.log("Error in the printEnemies function", data.responseText);
+        }
+      });
   }
 
   

@@ -18,5 +18,6 @@ if (isset($_REQUEST["reset"])) {
   unset($ds->bots);
   unset($ds->human);
   unset($ds->items);
+  unset($ds->challenges);
   echo(json_encode(true));
 }
