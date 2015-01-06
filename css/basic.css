@@ -11,3 +11,7 @@ form {
 input, select, button {
 	margin: 5px;
 }
+
+.messageBox {
+	margin: 10px;
+}

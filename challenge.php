@@ -15,21 +15,15 @@ $ds = new DBObjectSaver(array(
 
 
 
+$ch0 = file_get_contents("./data/ch0.json");
+$ch1 = file_get_contents("./data/ch1.json");
+$ch2 = file_get_contents("./data/ch2.json");
+$ch3 = file_get_contents("./data/ch2.json");
+$ch4 = file_get_contents("./data/ch3.json");
 
-$ch1 = file_get_contents("./data/ch0.json");
-$ch2 = file_get_contents("./data/ch1.json");
-
-$challenges = new Array();
 
 $challenge = json_decode($ch1);
-var_dump("ch1".$ch1);
 
-if (isset($_REQUEST["challenge"]) {
+if (isset($_REQUEST["challenge"])) {
 	echo("Yohuu");
 }
-
-
-
-
-
-$challenge = json_decode($challenge_data, true);

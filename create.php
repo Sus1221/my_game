@@ -26,7 +26,9 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 			"speed" => $human->speed, 
 			"persistance" => $human->persistance,
 			"hands_on" => $human->hands_on,
-			"success" => $human->success
+			"success" => $human->success,
+			"tools" => $human->tools,
+			"type" => $human->class
 	);
 		echo(json_encode($human_val_now));
 		/*echo(json_encode($human = &$ds->human[0]));*/
@@ -40,7 +42,7 @@ if (count($ds->bots) === 0) {
 
 	$list = array("grandParent", "middleAger", "teenAger", "toddler");
 	$human = &$ds->human[0];
-	$randomClass = get_class($human);
+	$randomClass = $human->class;
 
 	//If the randomed class is the same as the human's - randomize it again
 	while ($randomClass == get_class($human)) {
@@ -50,7 +52,6 @@ if (count($ds->bots) === 0) {
 	$ds->bots[] = new $randomClass("Jack Racer".rand(1,1000));
 	$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
 }
-
 
 
 
