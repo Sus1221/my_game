@@ -29,7 +29,7 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 			"success" => $human->success,
 			"tools" => $human->tools,
 			"type" => $human->class
-	);
+		);
 		echo(json_encode($human_val_now));
 		/*echo(json_encode($human = &$ds->human[0]));*/
 	} else {
@@ -54,12 +54,17 @@ if (count($ds->bots) === 0) {
 }
 
 
-
-
-
 //Echos humans value right now
 //Working!
 /*echo(json_encode($human_val_now));
 echo(json_encode($ds->bots[0]->name));
 */
 
+//trying to get win_tool to work
+/*$sus = new Character("Sus");
+echo("Här:");
+var_dump($sus);
+echo("nu");
+$vep = "Kanin";
+$sus->tools[] = $vep;
+echo($sus->tools);*/

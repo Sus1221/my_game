@@ -14,6 +14,7 @@ $(function() {
       success: function(data) {
           console.log("Game reset-ed!");
           $(".messageBox").hide();
+          $("#headerMessage").append("Game is now restarted");
       },
       error: function(data) {
         console.log("Something wrong in the reset process!");
@@ -27,7 +28,7 @@ $(function() {
             var humanName = $("#humanName").val();
             var humanClass = $("#charSelectClass").val();
             console.log("newChar name and class: ", humanName, humanClass);
-
+            $("#headerMessage").html("");
             sendHumanInfo(humanName, humanClass);
 
             $("#startForm").hide();
@@ -46,7 +47,7 @@ $(function() {
         player_class: cl
       },
       success: function(data) {
-        console.log("Name and class of sendHumanInfo success:", data);
+        console.log("Success! Name and class of sendHumanInfo success:", data);
         printHumanInfo(data);
       },
       error: function(data) {
@@ -63,7 +64,7 @@ $(function() {
             $(".messageBox").append(key + " : " +data[key]+"<br>");
           }
     }
-    challengeOffer();
+    /*challengeOffer()*/;
   }
 
 function challengeOffer(name,cl) {
