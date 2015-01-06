@@ -39,6 +39,5 @@ if (isset($_REQUEST["challenge"])) {
 
 if (isset($_REQUEST["challengeChange"])) {
 	echo($story_data2);
-	$ds->human[0]->get_change_challenge;
 	$ds->human[0]->success -=5;
 }

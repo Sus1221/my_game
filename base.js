@@ -136,12 +136,15 @@ function recieveItem() {
               $(".messageBox").append(key + " : " +data[key]+"<br>");
             }
           }
+          $(".messageBox").append("<button class='showEnemies'>Show Enemies</button>");
         },
         error: function(data) {
           console.log("Error in the recieveItem function", data.responseText);
         }
       });
 }
+
+  
 
   function printEnemies(data){
     console.log("CL printEnemies",data);

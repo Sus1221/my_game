@@ -15,7 +15,7 @@ class Item extends Base {
 	}
 
 	public function get_description() {
-		return $this->description;
+	return $this->description;
 	}
 
 }

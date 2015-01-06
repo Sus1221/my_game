@@ -79,6 +79,10 @@ class Character extends Base {
     return $this->tools;
   }
 
+  public function set_tools() {
+    return $this->tools;
+  }
+
   public function get_class() {
     return get_class($this);
   }
