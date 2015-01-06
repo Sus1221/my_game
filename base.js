@@ -56,6 +56,7 @@ $(function() {
     });
   }
 
+  //Prints info about the newly created human-player to the screen
   function printHumanInfo(data) {
     $(".messageBox").show();
     $('.messageBox').append("These are facts about you: <br>");
@@ -64,14 +65,13 @@ $(function() {
             $(".messageBox").append(key + " : " +data[key]+"<br>");
           }
     }
-    /*challengeOffer()*/;
+    challengeOffer();
   }
 
 function challengeOffer(name,cl) {
-    console.log("This is the console log from challengeOffer", name, cl);
 
     $.ajax({
-      url: "create.php",
+      url: "challenge.php",
       dataType: "json",
       data: {
         challenge: 1,
@@ -86,6 +86,8 @@ function challengeOffer(name,cl) {
     });
 
     $(".messageBox").append("You are now offered to do this challenge: <br>");
+
+    
 
     $(".messageBox").append("You either accept or change challenge. A random change will cost you 5 success-points.<br>",
                             "<button class = 'acceptCh'>Accept</button><button class='randomCh'>Random change</button>");

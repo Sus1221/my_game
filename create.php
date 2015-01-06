@@ -31,14 +31,17 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 			"type" => $human->class
 		);
 		echo(json_encode($human_val_now));
-		/*echo(json_encode($human = &$ds->human[0]));*/
 	} else {
 		$human = &$ds->human[0];
 	}
+
+	//runs function in item.php
+	makeItems();
+	createBots();
 }
 
 //Creating two bots if there aren't any
-if (count($ds->bots) === 0) {
+/*if (count($ds->bots) === 0) {
 
 	$list = array("grandParent", "middleAger", "teenAger", "toddler");
 	$human = &$ds->human[0];
@@ -51,8 +54,30 @@ if (count($ds->bots) === 0) {
 
 	$ds->bots[] = new $randomClass("Jack Racer".rand(1,1000));
 	$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
-}
+}*/
 
+	function createBots() {
+		if (count($ds->bots) === 0) {
+
+			$list = array("grandParent", "middleAger", "teenAger", "toddler");
+			$human = &$ds->human[0];
+			$randomClass = get_class($human);
+
+			//If the randomed class is the same as the human's - randomize it again
+			while ($randomClass == get_class($human)) {
+				$randomClass = $list[array_rand($list, 1)];
+			}
+
+			$ds->bots[] = new $randomClass("Jack Racer".rand(1,1000));
+			
+			while (($randomClass == get_class($human)) || ($randomClass == get_class($ds->bots[0]))) {
+				$randomClass = $list[array_rand($list, 1)];
+			}
+			$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
+		}
+	}
+
+echo(get_class($ds->human[0]).get_class($ds->bots[0]).get_class($ds->bots[1]));
 
 //Echos humans value right now
 //Working!
@@ -68,3 +93,4 @@ echo("nu");
 $vep = "Kanin";
 $sus->tools[] = $vep;
 echo($sus->tools);*/
+

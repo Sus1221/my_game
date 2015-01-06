@@ -20,17 +20,7 @@ $ch2 = file_get_contents("./data/ch2.json");
 $ch3 = file_get_contents("./data/ch3.json");
 $ch4 = file_get_contents("./data/ch4.json");
 
-$ds->items[] = new Item(
-    "GPS",
-  array(
-    "handling" => 80,
-    "speed" => 70,
-    "persistance" => 0,
-    "hands_on" => 50
-  )
-);
 
-var_dump($ds->items);
 
 /*$ds->challenges[] =new Challenge("Cruising1", 50, 0, 4, 4);
 $ds->challenges[] =new Challenge("Cruising2", 50, 0, 4, 4);
@@ -51,6 +41,15 @@ if (isset($_REQUEST["challenge"])) {
 	echo("Yohuu");
 }
 
+$ds->items[] = new Item(
+    "GPS",
+  array(
+    "handling" => 80,
+    "speed" => 70,
+    "persistance" => 0,
+    "hands_on" => 50
+  )
+);
 /*var_dump($ds->bots);
 var_dump($ds->human);
 
