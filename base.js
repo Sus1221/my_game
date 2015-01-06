@@ -1,7 +1,9 @@
 $(function() {
   
+  //Initially hiding this div
   $(".messageBox").hide();
 
+  //When pressing the reset button - the whole game-database empties
   $(".reset").click(function() {
     $("#startForm").show();
 
@@ -68,7 +70,7 @@ $(function() {
     challengeOffer();
   }
 
-function challengeOffer(name,cl) {
+function challengeOffer() {
   $.ajax({
       url: "challenge.php",
       dataType: "json",
@@ -108,8 +110,7 @@ $("body").on('click', ".randomCh", (function() {
       success: function(data) {
         $(".messageBox").html("This change cost you 5 success-points. <br> Your new challange is: " +
                               "<h1>"+data.name+"</h1>"+
-                              data.description,"<br>"+
-                              "<button id='carry_on'>Continue</button>"
+                              data.description+"<br>"
                               );
         console.log("Data from the success of challengeOffer: ", data);
         recieveItem();
@@ -121,7 +122,25 @@ $("body").on('click', ".randomCh", (function() {
 }));
 
 function recieveItem() {
-
+   $('.messageBox').append("You now recieved an item! It adds on to some of your strengths! <br>");
+      $.ajax({
+        url: "item.php",
+        dataType: "json",
+        data: {
+          plusItem: 1
+        },
+        success: function(data) {
+          console.log("data of recieveItem success:", data);
+          for(var key in data) {
+            if(data.hasOwnProperty(key)) {
+              $(".messageBox").append(key + " : " +data[key]+"<br>");
+            }
+          }
+        },
+        error: function(data) {
+          console.log("Error in the recieveItem function", data.responseText);
+        }
+      });
 }
 
   function printEnemies(data){
