@@ -124,16 +124,14 @@ if (isset($_REQUEST["plusItem"])) {
     	$rand = rand(0,count($ds->items));
     	//Inserts a random tool from items to human-tool-list
     	
-
+    	//Fetches the values of the random item
     	$handlingI = ($ds->items[$rand]->skills["handling"]);
     	$speedI = ($ds->items[$rand]->skills["speed"]);
     	$persistanceI = ($ds->items[$rand]->skills["persistance"]);
     	$hands_onI = ($ds->items[$rand]->skills["hands_on"]);
-    	$item_name = ($ds->items[$rand][0]);
+    	$item_name = ($ds->items[$rand]->description);
 
-    	/*echo($handlingI.$speedI.$persistanceI.$hands_onI);*/
-    	
-
+    	//creating an array containing data to send back via ajax
     	$human = &$ds->human[0];
 		$human_val_added = array(
 			"item_name" => $item_name,
@@ -151,7 +149,8 @@ if (isset($_REQUEST["plusItem"])) {
 
 }
 
-var_dump($ds->items[0][0]);
+/*var_dump($ds->items[0]);
+var_dump($ds->items[0]->description);*/
 
 /*var_dump($ds->items[0]->skills["handling"]);*/
 

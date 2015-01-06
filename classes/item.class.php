@@ -10,8 +10,12 @@ class Item extends Base {
     $this->skills = $skills;
   }
 
-public function get_skills() {
-  return $this->skills;
-}
+	public function get_skills() {
+  	return $this->skills;
+	}
+
+	public function get_description() {
+		return $this->description;
+	}
 
 }
