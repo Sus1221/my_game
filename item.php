@@ -128,7 +128,7 @@ if (isset($_REQUEST["plusItem"])) {
     	//remove it from available items
     	array_splice($ds->items, $rand-1, 1);
     	//and give it to the human
-    	$human->tools[] = $random_item;
+    	$human->tools[] = "bla";
 
     	//Fetches the values of the random item
     	$handlingI = $random_item->skills["handling"];
@@ -157,6 +157,8 @@ if (isset($_REQUEST["plusItem"])) {
     }
 
 }
+
+
 
 /*var_dump($ds->items[0]);
 var_dump($ds->items[0]->description);*/

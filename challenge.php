@@ -40,11 +40,11 @@ var_dump($ds->challenges[5]);
 var_dump($ds->challenges[6]);
 var_dump($ds->challenges[7]);
 var_dump($ds->challenges[8]);
-var_dump($ds->challenges[9]);
 */
-
-
-$random_challenge_no = rand(0,count($ds->challenges)-1);
+/*var_dump($ds->challenges[9]);
+$challenge_id = $ds->challenges[0];
+var_dump($challenge_id);
+$random_challenge_no = rand(0,count($ds->challenges)-1);*/
 //Working!
 /*var_dump($ds->challenges[$random_challenge_no]);*/
 /*echo($random_challenge_no);
@@ -55,10 +55,12 @@ $story_data2 = file_get_contents("data/ch2.json");
 
 if (isset($_REQUEST["challenge"])) {
 	echo($story_data);
+	/*echo(json_encode($ds->challenges[0]));*/
 	/*echo(json_encode($ds->challenges[$random_challenge_no]));*/
 }
 
 if (isset($_REQUEST["challengeChange"])) {
-	echo(json_encode($ds->challanges[$random_challenge_no]));
+	echo($story_data2);
+	/*echo(json_encode($ds->challenges[$random_challenge_no]));*/
 	$ds->human[0]->success -=5;
 }

@@ -15,6 +15,7 @@ $(function() {
       },
       success: function(data) {
           console.log("Game reset-ed!");
+          $(".messageBox").html("");
           $(".messageBox").hide();
           $("#headerMessage").html("");
           $("#headerMessage").append("Game is now restarted");
@@ -80,11 +81,10 @@ function challengeOffer() {
         challenge: 1,
       },
       success: function(data) {
-        console.log(data);
         $(".messageBox").append("You either accept or change the challenge below! A random change will cost you 5 success-points.<br>"+
                                 "You are now offered to do this challenge: <br>"+
-                                "<h1>"+data.name+"</h1>"+
-                                 data.description,"<br>"+
+                                "<h1>"+data["name"]+"</h1>"+
+                                 data.description+"<br>"+
                                 "<button class = 'acceptCh'>Accept</button><button class='randomCh'>Random change</button>");
         console.log("Data from the success of challengeOffer: ", data);
           
@@ -94,7 +94,6 @@ function challengeOffer() {
       }
   });
 }
-
 
 $("body").on('click', ".acceptCh", function() {
   console.log("accepted");
@@ -147,6 +146,7 @@ function recieveItem() {
       });
 }
 
+  //When clicked, the enemies data shows
   $("body").on('click', ".showEnemies", function() {
 
       $('.messageBox').html("");
@@ -158,12 +158,26 @@ function recieveItem() {
           enemies: 1
         },
         success: function(data) {
-          console.log("data of printEnemies success:", data.name);
+          console.log("data of show enemies success:", data.responseText);
+          printEnemiesData(data);
         },
         error: function(data) {
-          console.log("Error in the printEnemies function", data.responseText);
+          console.log("Error in the show enemies function", data.responseText);
         }
       });
           console.log("CL printEnemies");
   });
+
+  function printEnemiesData(data) {
+    $(".messageBox").show();
+    $('.messageBox').append("These are your competitors: <br>");
+    for(var key in data) {
+          if(data.hasOwnProperty(key)) {
+            $(".messageBox").append(key + " : " +data[key]+"<br>");
+          }
+    }
+    $(".messageBox").append("You now choose to do challenge alone or in a team with a competitor. Alone causes lager risks of loosing big and winning big.<br>"+
+                "<button id='chAlone'>Do challenge alone</button><button id='chAlone'>Do challenge together with one competitors</button>");
+  }
+
 });
