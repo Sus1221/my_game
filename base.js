@@ -16,6 +16,7 @@ $(function() {
       success: function(data) {
           console.log("Game reset-ed!");
           $(".messageBox").hide();
+          $("#headerMessage").html("");
           $("#headerMessage").append("Game is now restarted");
       },
       error: function(data) {
@@ -144,11 +145,11 @@ function recieveItem() {
       });
 }
 
+  $("body").on('click', ".showEnemies", function() {
   
 
-  function printEnemies(data){
-    console.log("CL printEnemies",data);
-    $('.messageBox').append("You have two competitors in this game: <br>");
+      $('.messageBox').html("");
+      $('.messageBox').append("You have two competitors in this game: <br>");
       $.ajax({
         url: "create.php",
         dataType: "json",
@@ -156,14 +157,12 @@ function recieveItem() {
           enemies: 1
         },
         success: function(data) {
-          console.log("data of printEnemies success:", data);
+          console.log("data of printEnemies success:", data.name);
         },
         error: function(data) {
           console.log("Error in the printEnemies function", data.responseText);
         }
       });
-  }
-
-  
-
+          console.log("CL printEnemies");
+  });
 });

@@ -9,7 +9,7 @@ class Character extends Base {
   protected $name;
   protected $success = 50;
   protected $tools = array();
-  protected $class;
+  //protected $class;
 
   public function __construct($name) {
     $this->name = $name;

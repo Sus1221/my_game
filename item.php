@@ -117,24 +117,31 @@ if (count($ds->items) === 0) {
 
 //If ajax calls for a new human-item
 if (isset($_REQUEST["plusItem"])) {
+	$human = &$ds->human[0];
 	
 	//if the human has less than three tools
-	if(count($ds->human->tools) < 3) {
-    	//$rand is a random number between 0 and number of items in $ds->items)
-    	$rand = rand(0,count($ds->items));
-    	
+	if(count($human->tools) < 3) {
+    	//$rand is a random number between 0 and number of items in $ds->items minus 1)
+    	$rand = rand(0,count($ds->items)-1);
+    	//select a random item
+    	$random_item = $ds->items[$rand];
+    	//remove it from available items
+    	array_splice($ds->items, $random_item, 1);
+    	//and give it to the human
+    	$human->tools[] = $random_item;
+
     	//Fetches the values of the random item
-    	$handlingI = ($ds->items[$rand]->skills["handling"]);
-    	$speedI = ($ds->items[$rand]->skills["speed"]);
-    	$persistanceI = ($ds->items[$rand]->skills["persistance"]);
-    	$hands_onI = ($ds->items[$rand]->skills["hands_on"]);
-    	$item_name = ($ds->items[$rand]->description);
+    	$handlingI = $random_item->skills["handling"];
+    	$speedI = $ds->items[$rand]->skills["speed"];
+    	$persistanceI = $ds->items[$rand]->skills["persistance"];
+    	$hands_onI = $ds->items[$rand]->skills["hands_on"];
+    	$item_name = $ds->items[$rand]->description;
     
     	//Inserts a random tool from items to human-tool-list
     	/*$ds->human->tools[] = $item_name;*/
 
     	//creating an array that sums strengths containing data to send back via ajax
-    	$human = &$ds->human[0];
+    	
 		$human_val_added = array(
 			"item_name" => $item_name,
 			"name" => $human->name,

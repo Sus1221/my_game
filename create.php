@@ -10,7 +10,6 @@ $ds = new DBObjectSaver(array(
 	"prefix" => "CarFanatics" // a prefix unique for your app/project
 	));
 
-
 //Creating human player based on the data he/she entered
 if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 
@@ -38,7 +37,7 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 }
 
 //Creating two bots if there aren't any
-if (count($ds->bots) === 0) {
+/*if (count($ds->bots) === 0) {
 
 	$list = array("grandParent", "middleAger", "teenAger", "toddler");
 	$human = &$ds->human[0];
@@ -51,11 +50,11 @@ if (count($ds->bots) === 0) {
 
 	$ds->bots[] = new $randomClass("Jack Racer".rand(1,1000));
 	$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
-}
+}*/
 
-/*if (count($ds->bots) === 0) {
+if (count($ds->bots) === 0) {
 
-	$list = array("grandParent", "middleAger", "teenAger", "toddler");
+	$list = array("Grandparent", "MiddleAger", "TeenAger", "Toddler");
 	$human = &$ds->human[0];
 	$randomClass = get_class($human);
 
@@ -65,12 +64,11 @@ if (count($ds->bots) === 0) {
 	}
 
 	$ds->bots[] = new $randomClass("Jack Racer".rand(1,1000));
-	
-	while (($randomClass == get_class($human)) || ($randomClass == get_class($ds->bots[0]))) {
+	while ($randomClass == get_class($human) || $randomClass == get_class($ds->bots[0])) {
 		$randomClass = $list[array_rand($list, 1)];
 	}
 	$ds->bots[] = new $randomClass("Betsy Powers".rand(1,1000));
-}*/
+}
 
 /*echo(get_class($ds->human[0]).get_class($ds->bots[0]).get_class($ds->bots[1]));*/
 
@@ -90,5 +88,29 @@ $sus->tools[] = $vep;
 echo($sus->tools);*/
 
 if (isset($_REQUEST["enemies"])) {
-	echo(json_encode($ds->bots));
+	$bot1 = $ds->bots[0];
+	$bot2 = $ds->bots[1];
+		$bots_val = array(
+		"nameBot1" => $bot1->name,
+		"handlingBot1" => $bot1->handling, 
+		"speedBot1" => $bot1->speed, 
+		"persistanceBot1" => $bot1->persistance,
+		"hands_onBot1" => $bot1->hands_on,
+		"successBot1" => $bot1->success,
+		"toolsBot1" => $bot1->tools,
+		"typeBot2" => $bot1->class,
+
+		"nameBot2" => $bot2->name,
+		"handlingBot2" => $bot2->handling, 
+		"speedBot2" => $bot2->speed, 
+		"persistanceBot2" => $bot2->persistance,
+		"hands_onBot2" => $bot2->hands_on,
+		"successBot2" => $bot2->success,
+		"toolsBot2" => $bot2->tools,
+		"typeBot2" => $bot2->class,
+		);
+		/*echo(json_encode($bots_val));*/
 }
+/*var_dump($ds->human);
+var_dump($ds->bots);*/
+	
