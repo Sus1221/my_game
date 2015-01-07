@@ -3,6 +3,7 @@
   class Challenge extends Base {
 
     protected $name;
+    protected $description;
     protected $skills;
 /*    
 	  protected $handling = 0;

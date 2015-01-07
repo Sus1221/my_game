@@ -72,6 +72,7 @@ $(function() {
   }
 
 function challengeOffer() {
+  console.log("challengeofferCL");
   $.ajax({
       url: "challenge.php",
       dataType: "json",
@@ -79,6 +80,7 @@ function challengeOffer() {
         challenge: 1,
       },
       success: function(data) {
+        console.log(data);
         $(".messageBox").append("You either accept or change the challenge below! A random change will cost you 5 success-points.<br>"+
                                 "You are now offered to do this challenge: <br>"+
                                 "<h1>"+data.name+"</h1>"+
@@ -146,7 +148,6 @@ function recieveItem() {
 }
 
   $("body").on('click', ".showEnemies", function() {
-  
 
       $('.messageBox').html("");
       $('.messageBox').append("You have two competitors in this game: <br>");

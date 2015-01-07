@@ -16,8 +16,7 @@ $ds = new DBObjectSaver(array(
 if (count($ds->challenges) === 0) {
 	for ($i=0; $i < 5; $i++) {
 		$challenge_json_data = file_get_contents("data/ch".$i.".json");
-		$challenge_data = json_decode($challenge_json_data);
-
+		$challenge_data = json_decode($challenge_json_data, true);
 		$ds->challenges[] = New Challenge($challenge_data["name"]."1", $challenge_data);
 		$ds->challenges[] = New Challenge($challenge_data["name"]."2", $challenge_data);
 	}
@@ -32,19 +31,34 @@ if (count($ds->challenges) === 0) {
 		$ds->challenges[] =new Challenge("CarPark2", 50, 0, 4, 4, 3);
 		$ds->challenges[] =new Challenge("Deliver1", 50, 0, 4, 4, 4);
 		$ds->challenges[] =new Challenge("Deliver2", 50, 0, 4, 4, 4);*/
+/*var_dump($ds->challenges[0]);
+var_dump($ds->challenges[1]);
+var_dump($ds->challenges[2]);
+var_dump($ds->challenges[3]);
+var_dump($ds->challenges[4]);
+var_dump($ds->challenges[5]);
+var_dump($ds->challenges[6]);
+var_dump($ds->challenges[7]);
+var_dump($ds->challenges[8]);
+var_dump($ds->challenges[9]);
+*/
 
 
-$random_challenge_no = count($ds->challenges)-1;
+$random_challenge_no = rand(0,count($ds->challenges)-1);
+//Working!
+/*var_dump($ds->challenges[$random_challenge_no]);*/
 /*echo($random_challenge_no);
 var_dump($ds->challenges[$random_challenge_no]);*/
-/*$story_data = file_get_contents("data/ch1.json");
-$story_data2 = file_get_contents("data/ch2.json");*/
+
+$story_data = file_get_contents("data/ch1.json");
+$story_data2 = file_get_contents("data/ch2.json");
 
 if (isset($_REQUEST["challenge"])) {
-	echo($ds->challanges[random_challenge_no]);
+	echo($story_data);
+	/*echo(json_encode($ds->challenges[$random_challenge_no]));*/
 }
 
 if (isset($_REQUEST["challengeChange"])) {
-	echo($ds->challanges[random_challenge_no]);
+	echo(json_encode($ds->challanges[$random_challenge_no]));
 	$ds->human[0]->success -=5;
 }

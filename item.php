@@ -126,7 +126,7 @@ if (isset($_REQUEST["plusItem"])) {
     	//select a random item
     	$random_item = $ds->items[$rand];
     	//remove it from available items
-    	array_splice($ds->items, $random_item, 1);
+    	array_splice($ds->items, $rand-1, 1);
     	//and give it to the human
     	$human->tools[] = $random_item;
 
