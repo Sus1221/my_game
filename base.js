@@ -176,8 +176,11 @@ function recieveItem() {
             $(".messageBox").append(key + " : " +data[key]+"<br>");
           }
     }
-    $(".messageBox").append("You now choose to do challenge alone or in a team with a competitor. Alone causes larger risks of loosing big and winning big.<br>"+
-                "<button id='chAlone'>Do challenge alone</button><button id='chTogether'>Do challenge together with one competitors</button>");
+    $(".messageBox").append("You now choose to do challenge alone or in a team with a competitor."+
+                              "Alone causes larger risks of loosing big and winning big.<br>"+
+                              "A team-up costs you 5 success-points.<br>"+
+                              "<button id='chAlone'>Do challenge alone</button>"+
+                              "<button id='chTogether'>Do challenge together with one competitor</button>");
   }
 
   $("body").on('click', "#chAlone", (function() {
@@ -189,7 +192,7 @@ function recieveItem() {
           challengeAlone: 1
         },
         success: function(data) {
-          console.log("data of show enemies success:", data.responseText);
+          console.log("data of show enemies success:", data);
         },
         error: function(data) {
           console.log("Error in the show enemies function", data.responseText);
@@ -203,7 +206,7 @@ function recieveItem() {
         url: "create.php",
         dataType: "json",
         data: {
-          challangeTogether: 1
+          challengeTogether: 1
         },
         success: function(data) {
           console.log("data of show enemies success:", data.responseText);

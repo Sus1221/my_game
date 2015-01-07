@@ -23,6 +23,10 @@
       $this->id = $id;*/
     }
 
+    public function get_skills() {
+      $this->skills = $challenge_data["skills"];
+    }
+
     public function get_name() {
       return $this->name;
     }

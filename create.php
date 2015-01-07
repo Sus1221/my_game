@@ -138,9 +138,13 @@ var_dump($bots_val);
 	*/ 
 
 if (isset($_REQUEST["challangeAlone"])) {
-	
+	valueOfIdeal($ds->person[0]);
 }
 
-if (isset($_REQUEST["challangeTogether"])) {
-
+//
+if (isset($_REQUEST["challengeTogether"])) {
+	$rand = mt_rand(0,1);
+	//new team-object consisting of the human and a random pick of one of the two bots
+	$ds->team[] = new Team($ds->human[0],$ds->bots[$rand]);
+	var_dump($ds->bots[0]);
 }
