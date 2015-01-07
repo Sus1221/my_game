@@ -91,7 +91,7 @@ if (isset($_REQUEST["enemies"])) {
 	
 		$bot1 = &$ds->bots[0];
 		$bot2 = &$ds->bots[1];
-		
+
 		$bots_val = array(
 		"nameBot1" => $bot1->name,
 		"handlingBot1" => $bot1->handling, 
@@ -137,4 +137,4 @@ $bots_val = array(
 		"typeBot2" => $bot2->class,
 		);
 var_dump($bots_val);
-	*/
+	*/ 
