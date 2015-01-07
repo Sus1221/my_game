@@ -99,7 +99,6 @@ if (isset($_REQUEST["enemies"])) {
 		"persistanceBot1" => $bot1->persistance,
 		"hands_onBot1" => $bot1->hands_on,
 		"successBot1" => $bot1->success,
-		"toolsBot1" => $bot1->tools,
 		"typeBot2" => $bot1->class,
 		"nameBot2" => $bot2->name,
 		"handlingBot2" => $bot2->handling, 
@@ -107,7 +106,6 @@ if (isset($_REQUEST["enemies"])) {
 		"persistanceBot2" => $bot2->persistance,
 		"hands_onBot2" => $bot2->hands_on,
 		"successBot2" => $bot2->success,
-		"toolsBot2" => $bot2->tools,
 		"typeBot2" => $bot2->class,
 		);
 		echo(json_encode($bots_val));
@@ -138,3 +136,11 @@ $bots_val = array(
 		);
 var_dump($bots_val);
 	*/ 
+
+if (isset($_REQUEST["challangeAlone"])) {
+	
+}
+
+if (isset($_REQUEST["challangeTogether"])) {
+
+}

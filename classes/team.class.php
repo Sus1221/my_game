@@ -2,6 +2,7 @@
 
 class Team extends Character {
 
+	protected $members = array();
 	protected $handling;
 	protected $speed;
 	protected $persistance;
@@ -10,9 +11,18 @@ class Team extends Character {
 }
 
 
-public function __construct($one, $two) {
-    $this->handling = $one->handling + $two->handling;
-    $this->speed = $one->speed + $two->speed;
-    $this->persistance = $one->persistance + $two->persistance;
-    $this->hands_on = $one->hands_on + $two->hands_on;
+public function __construct($human, $bot) {
+
+	$this->members[] = $humanPlayer;
+    $this->members[] = $computerPlayer;
+    $this->handling = $human->handling + $bot->handling;
+    $this->speed = $human->speed + $bot->speed;
+    $this->persistance = $human->persistance + $bot->persistance;
+    $this->hands_on = $human->hands_on + $bot->hands_on;
   }
+
+
+ 
+  
+   
+

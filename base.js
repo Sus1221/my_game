@@ -165,19 +165,54 @@ function recieveItem() {
           console.log("Error in the show enemies function", data.responseText);
         }
       });
-          console.log("CL printEnemies");
+      console.log("CL printEnemies");
   });
 
   function printEnemiesData(data) {
     $(".messageBox").show();
-    $('.messageBox').append("These are your competitors: <br>");
+    $('.messageBox').append("These are your competitors: <br><br>");
     for(var key in data) {
           if(data.hasOwnProperty(key)) {
             $(".messageBox").append(key + " : " +data[key]+"<br>");
           }
     }
-    $(".messageBox").append("You now choose to do challenge alone or in a team with a competitor. Alone causes lager risks of loosing big and winning big.<br>"+
-                "<button id='chAlone'>Do challenge alone</button><button id='chAlone'>Do challenge together with one competitors</button>");
+    $(".messageBox").append("You now choose to do challenge alone or in a team with a competitor. Alone causes larger risks of loosing big and winning big.<br>"+
+                "<button id='chAlone'>Do challenge alone</button><button id='chTogether'>Do challenge together with one competitors</button>");
   }
+
+  $("body").on('click', "#chAlone", (function() {
+     $('.messageBox').html("");
+     $.ajax({
+        url: "create.php",
+        dataType: "json",
+        data: {
+          challengeAlone: 1
+        },
+        success: function(data) {
+          console.log("data of show enemies success:", data.responseText);
+        },
+        error: function(data) {
+          console.log("Error in the show enemies function", data.responseText);
+        }
+      });
+  }));
+
+    $("body").on('click', "#chTogether", (function() {
+      $('.messageBox').html("");
+     $.ajax({
+        url: "create.php",
+        dataType: "json",
+        data: {
+          challangeTogether: 1
+        },
+        success: function(data) {
+          console.log("data of show enemies success:", data.responseText);
+        },
+        error: function(data) {
+          console.log("Error in the show enemies function", data.responseText);
+        }
+      });
+  }));
+
 
 });
