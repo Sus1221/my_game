@@ -194,10 +194,10 @@ function recieveItem() {
           DoChallengeAlone: 1
         },
         success: function(data) {
-          console.log("data of show enemies success:", data);
+          console.log("success data of on click challenge alone function ajax:", data);
         },
         error: function(data) {
-          console.log("Error in the show enemies function", data.responseText);
+          console.log("error data of on click challenge alone function ajax:", data.responseText);
         }
       });
   }));
@@ -211,10 +211,10 @@ function recieveItem() {
           DoChallengeTogether: 1
         },
         success: function(data) {
-          console.log("data of show enemies success:", data.responseText);
+          console.log("success data of on click challenge together function ajax:", data.responseText);
         },
         error: function(data) {
-          console.log("Error in the show enemies function", data.responseText);
+          console.log("error data of on click challenge together function ajax:", data.responseText);
         }
       });
   }));

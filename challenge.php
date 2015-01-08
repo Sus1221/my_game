@@ -19,15 +19,15 @@ if (isset($_REQUEST["DoChallengeAlone"])) {
 	$human_result = round($raw_human_score,3);
 	
 	$raw_bot1_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[0]);
-	$bot1_result = round($raw_human_score,3);
+	$bot1_result = round($raw_bot1_score,3);
 	
 	$raw_bot2_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[1]);
-	$bot2_result = round($raw_human_score,3);
+	$bot2_result = round($raw_bot2_score,3);
 	
 }
 if (isset($_REQUEST["DoChallengeTogether"])) {
 	$ds->human[0]->success -=5;
-	$ds->present_challenge->doThisChallenge($ds->human[0]);
+	$ds->present_challenge[0]->doThisChallenge($ds->human[0]);
 
 }
 
@@ -40,22 +40,19 @@ if (isset($_REQUEST["DoChallengeTogether"])) {
 // var_dump($human_result);
 
 
-	$raw_human_score = &$ds->present_challenge[0]->howGoodAMatch($ds->human[0]);
+	$raw_human_score = $ds->present_challenge[0]->howGoodAMatch($ds->human[0]);
 	$human_result = round($raw_human_score,3);
 	
-	$raw_bot1_score = &$ds->present_challenge[0]->howGoodAMatch($ds->bots[0]);
-	$bot1_result = round($raw_human_score,3);
+	$raw_bot1_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[0]);
+	$bot1_result = round($raw_bot1_score,3);
 	
-	$raw_bot2_score = &$ds->present_challenge[0]->howGoodAMatch($ds->bots[1]);
-	$bot2_result = round($raw_human_score,3);
+	$raw_bot2_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[1]);
+	$bot2_result = round($raw_bot2_score,3);
 
-	var_dump($ds->present_challenge[0]);
 	echo($human_result);
 	echo($bot1_result);
 	echo($bot2_result);
-	var_dump($ds->human[0]);
-	var_dump($ds->bots[0]);
-	var_dump($ds->bots[1]);
+
 
 /*function challenge($person){
 
@@ -127,3 +124,24 @@ if (isset($_REQUEST["DoChallengeTogether"])) {
 }
 */
 
+////////////////////////////////////////////////
+//kladdar här tills hugo hjälpt mig med challenge - få ut rätt floats
+if (isset($_REQUEST["DoChallengeAlone"])) {
+	//run function doThisChallenge with human,bot1 and bot 2 on present challenge
+	$raw_human_score = $ds->present_challenge[0]->howGoodAMatch($ds->human[0]);
+	$human_result = round($raw_human_score,3);
+	
+	$raw_bot1_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[0]);
+	$bot1_result = round($raw_human_score,3);
+	
+	$raw_bot2_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[1]);
+	$bot2_result = round($raw_human_score,3);
+	
+}
+if (isset($_REQUEST["DoChallengeTogether"])) {
+	$ds->human[0]->success -=5;
+
+	$ds->present_challenge->doThisChallenge($ds->team[0]);
+	$ds->present_challenge->doThisChallenge($ds->bots[0]);
+
+}

@@ -1,8 +1,12 @@
 my_game
 =======
-- The order the php-files will run in is : 
-create.php
-challenge.php - will repeat itself throughout the game for each game round
-item.php
+Short description of php files:
 
--The reset.php only handles the function of the player starting over from scratch.
+create.php - creates human player, 2 bots, array of bots-info
+
+challenge_pick.php - creates challenges, REQUEST:challenge alone and REQUEST challengeChange
+
+challenge.php - executes challenge alone and together
+
+item.php - creates 10 items, REQUEST human plusItem, function minus_human_item
+reset.php - only handles the click function in base.js of the player starting over from scratch.
