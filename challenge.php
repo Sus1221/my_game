@@ -26,7 +26,9 @@ if (isset($_REQUEST["DoChallengeAlone"])) {
 	
 }
 if (isset($_REQUEST["DoChallengeTogether"])) {
+	$ds->human[0]->success -=5;
 	$ds->present_challenge->doThisChallenge($ds->human[0]);
+
 }
 
 
