@@ -95,12 +95,14 @@ function challengeOffer() {
   });
 }
 
+//When you accept the first challenge offer
 $("body").on('click', ".acceptCh", function() {
   console.log("accepted challenge");
   $(".messageBox").html("");
   recieveItem();
 });
 
+//When you choose to change to another random challenge
 $("body").on('click', ".randomCh", (function() {
   console.log("random challange click");
   $.ajax({

@@ -5,8 +5,8 @@
   "skills" : {		
 		"handling" : 80,
 		"speed" : 0,
-		"persistance" : 50,
-		"hands-on" : 10		
+		"persistance" : 0,
+		"hands-on" : 0	
 	}
 
 }

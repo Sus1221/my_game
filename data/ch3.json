@@ -3,10 +3,10 @@
   "name" : "Parking at a underground carpark",
   "description" : "Driving into the underground, finding a available spot without damaging your car. Or the buildning...",
   "skills" : {		
-		"handling" : 60,
+		"handling" : 80,
 		"speed" : 0,
-		"persistance" : 10,
-		"hands-on" : 30		
+		"persistance" : 0,
+		"hands-on" : 0	
 	}
 
 }

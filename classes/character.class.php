@@ -88,10 +88,8 @@ class Character extends Base {
   }
 
 
-  public function win_tool($tool) {
-    if (count($this->tools) < 3) {
-      array_push($this->tools, $tool);
-    }
+  /*public function win_tool() {
+   $this->success -= 5;
   }
 
   public function loose_tool() {
@@ -99,7 +97,7 @@ class Character extends Base {
       shuffle($this->tools);
       array_shift($this->tools[0]);
     }
-  }
+  }*/
 
   public function accept_challenge($challenge) {
     

@@ -63,8 +63,6 @@ if (isset($_REQUEST["challenge"])) {
 		"description" => $ds->challenges[$random_challenge_no]->description,
 		);
 	echo(json_encode($challange_data));
-} else {
-	/*echo(json_encode(false));*/
 }
 
 if (isset($_REQUEST["challengeChange"])) {
@@ -74,6 +72,4 @@ if (isset($_REQUEST["challengeChange"])) {
 		);
 	echo(json_encode($challange_data));
 	$ds->human[0]->success -=5;
-} else {
-	/*echo(json_encode(false));*/
 }
