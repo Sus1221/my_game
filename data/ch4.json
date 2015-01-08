@@ -1,7 +1,7 @@
 {
   "id" : 4,
   "name" : "Deliver a package",
-  "description" : "",
+  "description" : "Drive the windy roads to the city of Carburator 20 miles away to deliver a package. Can you find your way?",
   "skills" : {		
 		"handling" : 0,
 		"speed" : 40,

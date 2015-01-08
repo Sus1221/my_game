@@ -156,6 +156,8 @@ if (isset($_REQUEST["plusItem"])) {
 		echo(json_encode($human_val_added));
     }
 
+} else {
+	(json_encode(false));
 }
 
 

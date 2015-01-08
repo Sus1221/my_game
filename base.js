@@ -75,7 +75,7 @@ $(function() {
 function challengeOffer() {
   console.log("challengeofferCL");
   $.ajax({
-      url: "challenge.php",
+      url: "challenge_pick.php",
       dataType: "json",
       data: {
         challenge: 1,
@@ -84,7 +84,7 @@ function challengeOffer() {
         $(".messageBox").append("You either accept or change the challenge below! A random change will cost you 5 success-points.<br>"+
                                 "You are now offered to do this challenge: <br>"+
                                 "<h1>"+data["name"]+"</h1>"+
-                                 data.description+"<br>"+
+                                 data["description"]+"<br>"+
                                 "<button class = 'acceptCh'>Accept</button><button class='randomCh'>Random change</button>");
         console.log("Data from the success of challengeOffer: ", data);
           
@@ -96,23 +96,23 @@ function challengeOffer() {
 }
 
 $("body").on('click', ".acceptCh", function() {
-  console.log("accepted");
+  console.log("accepted challenge");
   $(".messageBox").html("");
   recieveItem();
 });
 
 $("body").on('click', ".randomCh", (function() {
-  console.log("randomch click");
+  console.log("random challange click");
   $.ajax({
-      url: "challenge.php",
+      url: "challenge_pick.php",
       dataType: "json",
       data: {
         challengeChange: 1,
       },
       success: function(data) {
         $(".messageBox").html("This change cost you 5 success-points. <br> Your new challange is: " +
-                              "<h1>"+data.name+"</h1>"+
-                              data.description+"<br>"
+                              "<h1>"+data["name"]+"</h1>"+
+                              data["description"]+"<br>"
                               );
         console.log("Data from the success of challengeOffer: ", data);
         recieveItem();

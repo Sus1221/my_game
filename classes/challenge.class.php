@@ -51,4 +51,8 @@
       return $this->id;
     }
 
+    public function get_description() {
+      return $this->description;
+    }
+
   }

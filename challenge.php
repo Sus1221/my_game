@@ -44,8 +44,8 @@ var_dump($ds->challenges[8]);
 */
 /*var_dump($ds->challenges[9]);
 $challenge_id = $ds->challenges[0];
-var_dump($challenge_id);
-$random_challenge_no = rand(0,count($ds->challenges)-1);*/
+var_dump($challenge_id);*/
+$random_challenge_no = rand(0,count($ds->challenges)-1);
 //Working!
 /*var_dump($ds->challenges[$random_challenge_no]);*/
 /*echo($random_challenge_no);
@@ -55,15 +55,24 @@ $story_data = file_get_contents("data/ch1.json");
 $story_data2 = file_get_contents("data/ch2.json");
 
 if (isset($_REQUEST["challenge"])) {
-	echo($story_data);
+	/*echo($story_data);*/
 	/*echo(json_encode($ds->challenges[0]));*/
-	/*echo(json_encode($ds->challenges[$random_challenge_no]));*/
+	$challange_data = array(
+		"name" => $ds->challenges[$random_challenge_no]->name,
+		"description" => $ds->challenges[$random_challenge_no]->description,
+		"skills" => $ds->challenges[$random_challenge_no]->skills,
+		);
+	echo(json_encode($ds->challenges[$random_challenge_no]));
+} else {
+	echo(json_encode(false));
 }
 
 if (isset($_REQUEST["challengeChange"])) {
 	echo($story_data2);
 	/*echo(json_encode($ds->challenges[$random_challenge_no]));*/
 	$ds->human[0]->success -=5;
+} else {
+	(json_encode(false));
 }
 
 /*function challenge($person){

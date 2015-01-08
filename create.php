@@ -33,7 +33,8 @@ if (isset($_REQUEST["player_name"]) && isset($_REQUEST["player_class"])) {
 	} else {
 		$human = &$ds->human[0];
 	}
-
+} else {
+	(json_encode(false));
 }
 
 //Creating two bots if there aren't any
@@ -109,6 +110,8 @@ if (isset($_REQUEST["enemies"])) {
 		"typeBot2" => $bot2->class,
 		);
 		echo(json_encode($bots_val));
+} else {
+	(json_encode(false));
 }
 
 /*var_dump($ds->human);
@@ -139,6 +142,8 @@ var_dump($bots_val);
 
 if (isset($_REQUEST["challangeAlone"])) {
 	valueOfIdeal($ds->person[0]);
+} else {
+	(json_encode(false));
 }
 
 //
@@ -147,4 +152,6 @@ if (isset($_REQUEST["challengeTogether"])) {
 	//new team-object consisting of the human and a random pick of one of the two bots
 	$ds->team[] = new Team($ds->human[0],$ds->bots[$rand]);
 	var_dump($ds->bots[0]);
+} else {
+	(json_encode(false));
 }

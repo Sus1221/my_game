@@ -21,4 +21,6 @@ if (isset($_REQUEST["reset"])) {
   unset($ds->challenges);
   unset($ds->team);
   echo(json_encode(true));
+} else {
+  (json_encode(false));
 }
