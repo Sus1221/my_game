@@ -121,16 +121,56 @@ if (isset($_REQUEST["plusItem"])) {
 	
 	//if the human has less than three tools
 	if(count($human->tools) < 3) {
-    	//$rand is a random number between 0 and number of items in $ds->items minus 1)
+    	//$rand is a random number between 0 and number of items in $ds->items minus 1
     	$rand = rand(0,count($ds->items)-1);
-    	//select a random item
+    	//select a random item from database items
     	$random_item = $ds->items[$rand];
-    	//remove it from available items
-    	array_splice($ds->items, $rand-1, 1);
-    	//and give it to the human
-    	$human->tools[] = $random_item->description; 
+    	//remove it from database items - changed my mind - don't do it!
+    	// array_splice($ds->items, $rand-1, 1);
+    	//put the name of the random item in the human-tools array
+    	$human->tools[] = $random_item->description;
+    	//Push the object of the whole new human tool into an own database-array
+    	$ds->human_tools[] = $random_item;
 
-    	//Fetches the values of the random item
+    	//Fetches the values and name of the random item
+    	$handlingI = $random_item->skills["handling"];
+    	$speedI = $ds->items[$rand]->skills["speed"];
+    	$persistanceI = $ds->items[$rand]->skills["persistance"];
+    	$hands_onI = $ds->items[$rand]->skills["hands_on"];
+    	$item_name = $ds->items[$rand]->description;
+
+    	//creating an array that sums strengths and contains data to send back via ajax
+		$human_val_added = array(
+			"item_name" => $item_name,
+			"name" => $human->name,
+			"handling" => ($human->handling += $handlingI), 
+			"speed" => ($human->speed += $speedI), 
+			"persistance" => ($human->persistance += $persistanceI),
+			"hands_on" => ($human->hands_on += $hands_onI),
+			"success" => $human->success,
+			"tools" => $human->tools,
+			"type" => $human->class
+		);
+		echo(json_encode($human_val_added));
+    }
+
+} 
+
+function minus_human_item() {
+	$human = &$ds->human[0];
+	
+	//if the human has less than three tools
+	if(count($human->tools) > 0) {
+    	//$rand is a random number between 0 and number of items in human->tools array minus 1
+    	$rand = rand(0,count($human->tools)-1);
+    	//select a random item name from human tools array
+    	$random_item = $human->tools[$rand];
+    	//remove the name from human tools
+    	array_splice($human->tools, $rand-1, 1);
+    	//Find item where description = name of item just removed from human-tools
+    	$db_item_right_name = array_search($random_item, $ds->items);
+
+		//creating an array that containts item's strength-values to subtract from human strengths
     	$handlingI = $random_item->skills["handling"];
     	$speedI = $ds->items[$rand]->skills["speed"];
     	$persistanceI = $ds->items[$rand]->skills["persistance"];
@@ -153,8 +193,7 @@ if (isset($_REQUEST["plusItem"])) {
 			"tools" => $human->tools,
 			"type" => $human->class
 		);
-		echo(json_encode($human_val_added));
-    }
+	}
 
 } 
 

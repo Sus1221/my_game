@@ -20,5 +20,6 @@ if (isset($_REQUEST["reset"])) {
   unset($ds->items);
   unset($ds->challenges);
   unset($ds->team);
+  unset($ds->human_tools);
   echo(json_encode(true));
 }

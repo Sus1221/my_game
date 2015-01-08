@@ -56,6 +56,9 @@ function challenge($person){
 				}
 				}else { 
 					echo(json_encode("Bot"));
+					if(count($ds->$human[0]->tools) <= 3) {
+						shuffle($ds->$human[0]->tools);
+						array_pop($ds->$human[0]->tools);
 					$ds->human[0]->success -=5;
 				}
 
