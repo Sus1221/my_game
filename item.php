@@ -128,7 +128,7 @@ if (isset($_REQUEST["plusItem"])) {
     	//remove it from available items
     	array_splice($ds->items, $rand-1, 1);
     	//and give it to the human
-    	$human->tools[] = "bla";
+    	$human->tools[] = $random_item->description; 
 
     	//Fetches the values of the random item
     	$handlingI = $random_item->skills["handling"];
@@ -159,6 +159,20 @@ if (isset($_REQUEST["plusItem"])) {
 } else {
 	(json_encode(false));
 }
+
+
+		// $rand = rand(0,count($ds->items)-1);
+
+  //   	//select a random item
+  //   	$random_item = $ds->items[$rand];
+  //   	/*var_dump($random_item);
+  //   	var_dump($ds->items);*/
+  //   	//remove it from available items
+  //   	array_splice($ds->items, $rand-1, 1);
+  //   	//and give it to the human
+
+  //      	$human->tools[] = $random_item->description; 
+  //      	var_dump($human->tools);
 
 
 

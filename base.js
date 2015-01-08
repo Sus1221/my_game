@@ -114,11 +114,11 @@ $("body").on('click', ".randomCh", (function() {
                               "<h1>"+data["name"]+"</h1>"+
                               data["description"]+"<br>"
                               );
-        console.log("Data from the success of challengeOffer: ", data);
+        console.log("Data from the success of challengeChange: ", data);
         recieveItem();
       },
       error: function(data) {
-        console.log("Data from the error of challengeOffer: ", data, data.responseText);
+        console.log("Data from the error of challengeChange: ", data, data.responseText);
       }
   });
 }));

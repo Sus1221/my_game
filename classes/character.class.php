@@ -8,7 +8,7 @@ class Character extends Base {
   protected $hands_on = 0;
   protected $name;
   protected $success = 50;
-  protected $tools = array();
+  public $tools = array();
   //protected $class;
 
   public function __construct($name) {
