@@ -55,6 +55,7 @@
       return $this->description;
     }
 
+    //matching a player to $this challenges strength values
     public function howGoodAMatch($person){
     //total points a person has
     $personSum = 0;
