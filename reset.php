@@ -21,5 +21,8 @@ if (isset($_REQUEST["reset"])) {
   unset($ds->challenges);
   unset($ds->team);
   unset($ds->human_tools);
+  unset($ds->present_challenge);
   echo(json_encode(true));
 }
+
+var_dump($ds->present_challenge[0]);

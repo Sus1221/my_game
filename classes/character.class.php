@@ -71,8 +71,8 @@ class Character extends Base {
     return $this->success;
   }
 
-  public function set_success($number) {
-      $this->handling = $number;
+  public function set_success($val) {
+      $this->success = $val;
   }
 
   public function get_tools() {

@@ -4,7 +4,7 @@
 
     protected $name;
     protected $description;
-    protected $skills;
+    public $skills;
 /*    
 	  protected $handling = 0;
 	  protected $speed = 0;
@@ -55,4 +55,44 @@
       return $this->description;
     }
 
+    public function howGoodAMatch($person){
+    //total points a person has
+    $personSum = 0;
+    //total points possible for this challenge
+    $idealSum = 0;
+
+    //we now want to check how good a person is at performing this challenge
+    foreach($this->skills as $skill => $points){
+      //here we check points required by challenge
+      $needed = $points;
+      //here we check how many points the person has in each strength
+      $personHas = $person->{$skill}; 
+
+      //not for me
+      // //check if a person has any tools
+      // if (count($person->tools) > 0) {
+      //   //if they do, go through them
+      //   for ($i = 0; $i < count($person->tools); $i++) {
+      //     //and for each skill the tool has
+      //     foreach ($person->tools[$i]->skills as $toolSkill => $value) {
+      //       //if a toolSkill matches the skill we are currently calculating
+      //       if ($toolSkill == $skill) {
+      //         //add the toolSkill points 
+      //         $has += $value;
+      //       }
+      //     }
+      //   } 
+      // }
+
+      //if a person has more points than  the ideal, "round down" to ideal point value(to preserve our percentage)
+      //else count the skillpoints a person has
+      $personSum += $personHas > $needed ? $needed : $personHas;
+      $idealSum += $needed;
+    }
+    //returns f.e. 0,56
+    //return the percentage of skill points the person have
+    return $personSum/$idealSum;
   }
+
+  }
+

@@ -3,10 +3,10 @@
   "name" : "Parallel parking",
   "description" : "Squeeze your car into a tight free spot",
   "skills" : {		
-		"handling" : 0,
-		"speed" : 0,
+		"handling" : 80,
+		"speed" : 20,
 		"persistance" : 0,
-		"hands-on" : 80		
+		"hands_on" : 20		
 	}
 
 }

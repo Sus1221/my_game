@@ -4,7 +4,7 @@ $(function() {
   $(".messageBox").hide();
 
   //When pressing the reset button - the whole game-database empties
-  $(".reset").click(function() {
+  $("body").on('click', ".reset", function() {
     $("#startForm").show();
 
     $.ajax({
@@ -160,7 +160,7 @@ function recieveItem() {
           enemies: 1
         },
         success: function(data) {
-          console.log("data of show enemies success:", data.responseText);
+          console.log("data of show enemies success:", data);
           printEnemiesData(data);
         },
         error: function(data) {
@@ -188,10 +188,10 @@ function recieveItem() {
   $("body").on('click', "#chAlone", (function() {
      $('.messageBox').html("");
      $.ajax({
-        url: "create.php",
+        url: "challenge.php",
         dataType: "json",
         data: {
-          challengeAlone: 1
+          DoChallengeAlone: 1
         },
         success: function(data) {
           console.log("data of show enemies success:", data);
@@ -205,10 +205,10 @@ function recieveItem() {
     $("body").on('click', "#chTogether", (function() {
       $('.messageBox').html("");
      $.ajax({
-        url: "create.php",
+        url: "challenge.php",
         dataType: "json",
         data: {
-          challengeTogether: 1
+          DoChallengeTogether: 1
         },
         success: function(data) {
           console.log("data of show enemies success:", data.responseText);

@@ -6,7 +6,8 @@
 		"handling" : 0,
 		"speed" : 80,
 		"persistance" : 0,
-		"hands-on" : 0			
+		"hands_on" : 30			
 	}
 
 }
+
