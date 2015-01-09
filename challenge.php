@@ -27,15 +27,15 @@ if (isset($_REQUEST["DoChallengeAlone"])) {
 	//if human wins
 	if ($human_result > $bot1_result && $human_result > $bot2_result) {
 		$ds->human[0]->success +=15;
-		echo ("You won this challenge");
+		echo(json_encode("You won"));
 	//if human comes in second
 	}else if($human_result > $bot1_result || $human_result > $bot2_result) {
 		//minus_human_item();
-		echo("You came in second");
+		echo(json_encode("You came in second in "));
 	//if human comes in last
 	}else {
 		$ds->human[0]->success -=5;
-		echo("You lost.");
+		echo(json_encode("You lost"));
 	}
 	
 }

@@ -159,7 +159,7 @@ if (isset($_REQUEST["plusItem"])) {
 function minus_human_item() {
 	$human = &$ds->human[0];
 	
-	//if the human has less than three tools
+	//if the human has any tools
 	if(count($human->tools) > 0) {
     	//$rand is a random number between 0 and number of items in human->tools array minus 1
     	$rand = rand(0,count($human->tools)-1);

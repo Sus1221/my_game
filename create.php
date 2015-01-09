@@ -111,6 +111,45 @@ if (isset($_REQUEST["enemies"])) {
 		echo(json_encode($bots_val));
 }
 
+if (isset($_REQUEST["currentStandings"])) {
+
+		$human = &$ds->human[0];
+		$bot1 = &$ds->bots[0];
+		$bot2 = &$ds->bots[1];
+		
+		$current_standings_array = array(
+			"name" => $human->name,
+			"handling" => $human->handling, 
+			"speed" => $human->speed, 
+			"persistance" => $human->persistance,
+			"hands_on" => $human->hands_on,
+			"success" => $human->success,
+			"tools" => $human->tools,
+			"type" => $human->class,
+			"nameBot1" => $bot1->name,
+			"handlingBot1" => $bot1->handling, 
+			"speedBot1" => $bot1->speed, 
+			"persistanceBot1" => $bot1->persistance,
+			"hands_onBot1" => $bot1->hands_on,
+			"successBot1" => $bot1->success,
+			"typeBot2" => $bot1->class,
+			"nameBot2" => $bot2->name,
+			"handlingBot2" => $bot2->handling, 
+			"speedBot2" => $bot2->speed, 
+			"persistanceBot2" => $bot2->persistance,
+			"hands_onBot2" => $bot2->hands_on,
+			"successBot2" => $bot2->success,
+			"typeBot2" => $bot2->class,
+		);
+		//If someone won the game
+		if($human->success >= 100 || $bot1->success >= 100 || $bot2->success >= 100){
+			$current_standings_array_with_w = array("The game is now over!" => "We have a winner!") + $current_standings_array;
+			echo(json_encode($current_standings_array_with_w));
+		//If nobody won the game yet
+		}else{
+			echo(json_encode($current_standings_array));
+		}
+}
 
 /*var_dump($ds->human);
 var_dump($ds->bots);*/
@@ -149,3 +188,4 @@ if (isset($_REQUEST["challengeTogether"])) {
 	$ds->team[] = new Team($ds->human[0],$ds->bots[$rand]);
 	var_dump($ds->bots[0]);
 }*/
+
