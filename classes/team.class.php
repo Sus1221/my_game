@@ -2,8 +2,6 @@
 
 		$ds->human[0] = $human;
 		$ds->bots[0] = $bot;
-		var_dump($ds->human[0]);
-		var_dump($ds->bots);
 
 class Team extends Character {
 

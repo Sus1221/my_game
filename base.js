@@ -218,10 +218,12 @@ function recieveItem() {
           DoChallengeTogether: 1
         },
         success: function(data) {
-          console.log("success data of on click challenge together function ajax:", data.responseText);
+          console.log("success data of on click challenge together function ajax:" + data + data.responseText);
+          $('.messageBox').append(data);
+          currentStandings();
         },
         error: function(data) {
-          console.log("error data of on click challenge together function ajax:", data.responseText);
+          console.log("error data of on click challenge together function ajax:" + data + data.responseText);
         }
       });
     });

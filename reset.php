@@ -25,4 +25,3 @@ if (isset($_REQUEST["reset"])) {
   echo(json_encode(true));
 }
 
-var_dump($ds->present_challenge[0]);
