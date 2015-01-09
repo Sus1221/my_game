@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 //Nodebite black box
 include_once("nodebite-swiss-army-oop.php");
@@ -13,36 +13,80 @@ $ds = new DBObjectSaver(array(
   "prefix" => "CarFanatics"
 ));
 
-if (isset($_REQUEST["DoChallengeAlone"])) {
-	//run function doThisChallenge with human,bot1 and bot 2 on present challenge
-		$raw_human_score = $ds->present_challenge[0]->howGoodAMatch($ds->human[0]);
-	$human_result = round($raw_human_score,3);
-	
-	$raw_bot1_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[0]);
-	$bot1_result = round($raw_bot1_score,3);
-	
-	$raw_bot2_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[1]);
-	$bot2_result = round($raw_bot2_score,3);
+ if (isset($_REQUEST["DoChallengeAlone"])) {
+ 	//run function doThisChallenge with human,bot1 and bot 2 on present challenge
+ 	$raw_human_score = $ds->present_challenge[0]->howGoodAMatch($ds->human[0]);
+ 	$human_result = round($raw_human_score,3);
 
-	//if human wins
-	if ($human_result > $bot1_result && $human_result > $bot2_result) {
-		$ds->human[0]->success +=15;
-		echo(json_encode("You won"));
-	//if human comes in second
-	}else if($human_result > $bot1_result || $human_result > $bot2_result) {
-		//minus_human_item();
-		echo(json_encode("You came in second in "));
-	//if human comes in last
-	}else {
-		$ds->human[0]->success -=5;
-		echo(json_encode("You lost"));
-	}
+ 	$raw_bot1_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[0]);
+ 	$bot1_result = round($raw_bot1_score,3);
 	
-}
+ 	$raw_bot2_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[1]);
+ 	$bot2_result = round($raw_bot2_score,3);
+
+ 	//if human wins
+ 	if ($human_result > $bot1_result && $human_result > $bot2_result) {
+ 		$ds->human[0]->success +=15;
+ 		if($bot1_result > $bot2_result) {
+ 			$ds->bots[1]->success -=5;
+ 		}else{
+ 			$ds->bots[0]->success -=5;
+ 		}
+ 		echo(json_encode("You won"));
+ 	//if human comes in second
+ 	}else if($human_result > $bot1_result || $human_result > $bot2_result) {
+ 		//minus_human_item();
+ 		if($bot1_result > $bot2_result) {
+ 			$ds->bots[0]->success +=15;
+ 			$ds->bots[1]->success -=5;
+ 		}else {
+ 			$ds->bots[0]->success -=5;
+ 			$ds->bots[1]->success +=15;
+ 		}
+ 		echo(json_encode("You came in second in "));
+ 	//if human comes in last
+ 	}else {
+ 		$ds->human[0]->success -=5;
+ 		if($bot1_result > $bot2_result) {
+ 			$ds->bots[0]->success +=15;
+ 		}else {
+ 			$ds->bots[1]->success +=15;
+ 		}
+ 		//minus_human_item();
+ 		echo(json_encode("You lost"));
+ 	}
+ }
+
 if (isset($_REQUEST["DoChallengeTogether"])) {
-	$ds->human[0]->success -=5;
-	$ds->present_challenge[0]->doThisChallenge($ds->human[0]);
+ 	//Cost human -5 successpoints
+ 	$ds->human[0]->success -=5;
+ 	//create a team consisting of the human and a bot
+ 	$ds->team[] = New Team($ds->human[0], $ds->bots[0]);
+ 	
+ 	//Make the team and tem lone bot run the challenge
+ 	$raw_team_score = $ds->present_challenge[0]->doThisChallenge($ds->team[0]);
+ 	$team_result = round($raw_human_score,3);
+ 	
+ 	$raw_lone_bot_score = $ds->present_challenge[0]->doThisChallenge($ds->bot[1]);
+ 	$lone_bot_result = round($raw_lone_bot_score,3);
+ 	
+ 	//if team wins
+ 	if($team_result > $lone_bot_result) {
+ 		$ds->human[0]->success +=9;
+ 		$ds->bots[0]->success +=9;
+ 		$ds->bots[1]->success -=5;
+ 		echo(json_encode("The team won"));
+ 	//if team looses
+ 	}else {
+ 		$ds->human[0]->success -=5;
+ 		$ds->bots[0]->success -=5;
+ 		$ds->bots[1]->success +=15;
+ 		echo(json_encode("The team lost"));
+ 	}
 
+
+ 	//Lastly - Delete the temporary team
+ 	unset($ds->team);
 }
 
 
