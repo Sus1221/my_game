@@ -127,7 +127,7 @@ $("body").on('click', ".randomCh", function() {
 
 //Before every challenge, you recieve a random item
 function recieveItem() {
-   $('.messageBox').append("<p>You now recieved an item! It adds on to some of your strengths! </p><br>");
+   $('.messageBox').append("<p>If you had less than three items, you now recieved an item! Items adds on to some of your strengths! </p><br>");
       $.ajax({
         url: "item.php",
         dataType: "json",
@@ -136,10 +136,14 @@ function recieveItem() {
         },
         success: function(data) {
           console.log("data of recieveItem success:", data);
-          for(var key in data) {
-            if(data.hasOwnProperty(key)) {
-              $(".messageBox").append("<p>",key + " : " +data[key]+"</p><br>");
-            }
+          if(data.hasOwnProperty("item_name")) {
+              for(var key in data) {
+                if(data.hasOwnProperty(key)) {
+                  $(".messageBox").append("<p>" + key + " : " +data[key]+"</p><br>");
+                }
+              }
+          }else {
+            $(".messageBox").append("<p>" + data + "</p><br>");
           }
           $(".messageBox").append("<button class='showEnemies'>Show Enemies</button>");
         },

@@ -152,6 +152,8 @@ if (isset($_REQUEST["plusItem"])) {
 			"type" => $human->class
 		);
 		echo(json_encode($human_val_added));
+    }else {
+    	echo(json_encode("No new items for you, you already have three"));
     }
 
 } 
