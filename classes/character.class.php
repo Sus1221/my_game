@@ -1,7 +1,7 @@
 <?php
 
 class Character extends Base {
-  // properties
+
   protected $handling = 0;
   protected $speed = 0;
   protected $persistance = 0;
@@ -9,7 +9,6 @@ class Character extends Base {
   protected $name;
   protected $success = 50;
   public $tools = array();
-  //protected $class;
 
   public function __construct($name) {
     $this->name = $name;
@@ -87,32 +86,5 @@ class Character extends Base {
     return get_class($this);
   }
 
-
-  /*public function win_tool() {
-   $this->success -= 5;
-  }
-
-  public function loose_tool() {
-    if (count($this->tools) > 0) {
-      shuffle($this->tools);
-      array_shift($this->tools[0]);
-    }
-  }*/
-
-  public function accept_challenge($challenge) {
-    
-  }
-
-  public function change_challenge($challenge) {
-    
-  }
-
-  public function carry_out_challenge($challenge) {
-    
-  }
-
-  public function carry_out_challenge_with_companion($challenge) {
-    
-  }
 }
 

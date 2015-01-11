@@ -13,8 +13,7 @@ $ds = new DBObjectSaver(array(
   "prefix" => "CarFanatics"
 ));
 
-
-
+//if there aren't any items - create 10 of them
 if (count($ds->items) === 0) {
 		$ds->items[] = new Item(
 		    "gps",
@@ -113,9 +112,7 @@ if (count($ds->items) === 0) {
 		);
 }
 
-/*echo(count($ds->human->tools));*/
-
-//If ajax calls for adding a new human-item
+//If ajax requests that human recieved a new item
 if (isset($_REQUEST["plusItem"])) {
 	$human = &$ds->human[0];
 	
@@ -129,8 +126,6 @@ if (isset($_REQUEST["plusItem"])) {
     	// array_splice($ds->items, $rand-1, 1);
     	//put the name of the random item in the human-tools array
     	$human->tools[] = $random_item->description;
-    	//Push the object of the whole new human tool into an own database-array
-    	$ds->human_tools[] = $random_item;
 
     	//Fetches the values and name of the random item
     	$handlingI = $random_item->skills["handling"];
@@ -157,66 +152,3 @@ if (isset($_REQUEST["plusItem"])) {
     }
 
 } 
-
-
-
-//////////////////////////////////////////////////
-// $human = &$ds->human[0];
-// if(count($human->tools < 3)){
-// 	$human->tools[] = "air_filter2";
-// 	$human->tools[] = "energy_drink";
-// 	$human->tools[] = "gps2";
-// 	$human->tools[] = "gps2";
-// }
-// var_dump($human->tools);
-	
-    	//$rand is a random number between 0 and number of items in human->tools array minus 1
-    	// $rand = rand(0,count($human->tools)-1);
-    	// //select a random item name from human tools array
-    	// $random_item = $human->tools[$rand];
-    	// //remove the name from human tools
-    	// var_dump($random_item);
-    	/*array_splice($human->tools, $rand-1, 1);
-    	//Find item where description = name of item just removed from human-tools
-    	$db_item_right_name = array_search($random_item, $ds->items);
-
-		
-		//subtracting item's strength-values to subtract from human strengths
-    	$handlingI = $db_item_right_name["handling"];
-    	$speedI = $db_item_right_name["speed"];
-    	$persistanceI = $db_item_right_name["persistance"];
-    	$hands_onI = $db_item_right_name["hands_on"];
-    
-    	
-    	//creating an array that subtracts the values of the item from human strengths
-		$human_val_added = array(
-			"name" => $human->name,
-			"handling" => ($human->handling -= $handlingI), 
-			"speed" => ($human->speed -= $speedI), 
-			"persistance" => ($human->persistance -= $persistanceI),
-			"hands_on" => ($human->hands_on -= $hands_onI),
-			"success" => $human->success,
-			"tools" => $human->tools,
-		);
-	*/
-
-
-
-/*var_dump($ds->items[0]);
-var_dump($ds->items[0]->description);*/
-
-/*var_dump($ds->items[0]->skills["handling"]);*/
-
-    	
-
-
-/*var_dump($ds->items[$rand]);*/
-/*var_dump($ds->items[0]->handling);*/
-
-
-
-/*echo($ds->items[$rand]);
-
-$ds->human->tools[] = $ds->items[$rand];
-echo(count($ds->human->tools));*/
-

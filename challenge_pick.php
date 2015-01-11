@@ -3,8 +3,6 @@
 //Nodebite black box
 include_once("nodebite-swiss-army-oop.php");
 
-//create a new instance of the DBObjectSaver class 
-//and store it in the $db variable
 $ds = new DBObjectSaver(array(
   "host" => "127.0.0.1",
   "dbname" => "wu14oop2",
@@ -13,6 +11,7 @@ $ds = new DBObjectSaver(array(
   "prefix" => "CarFanatics"
 ));
 
+//If there isn't any stored challenges - create 10
 if (count($ds->challenges) === 0) {
 	for ($i=0; $i < 5; $i++) {
 		$challenge_json_data = file_get_contents("data/ch".$i.".json");
@@ -22,12 +21,9 @@ if (count($ds->challenges) === 0) {
 	}
 }
 
-
-
-
+//If game requests a challenge to be carried out, pick a random one
 if (isset($_REQUEST["challenge"])) {
-	/*echo($story_data);*/
-	/*echo(json_encode($ds->challenges[0]));*/
+
 	$random_challenge_no = rand(0,count($ds->challenges)-1);
 
 	$challange_data = array(
@@ -38,7 +34,9 @@ if (isset($_REQUEST["challenge"])) {
 	echo(json_encode($challange_data));
 }
 
+//If human requested to "throw the dice again" i.e. random out a new challenge
 if (isset($_REQUEST["challengeChange"])) {
+	
 	//human looses 5 success-points
 	$ds->human[0]->success -=5;
 	
@@ -51,10 +49,3 @@ if (isset($_REQUEST["challengeChange"])) {
 	echo(json_encode($challange_data));
 	
 }
-// $random_challenge_no = rand(0,count($ds->challenges)-1);
-
-// 	$challange_data = array(
-// 		"name" => $ds->challenges[$random_challenge_no]->name,
-// 		"description" => $ds->challenges[$random_challenge_no]->description,
-// 		);
-// 	$ds->present_challenge[] = $ds->challenges[$random_challenge_no];

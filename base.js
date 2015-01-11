@@ -14,24 +14,21 @@ $(function() {
         reset: 1
       },
       success: function(data) {
-          console.log("Game reset-ed!");
           $(".messageBox").html("");
           $(".messageBox").hide();
           $("#headerMessage").html("");
           $("#headerMessage").append("<p>Game is now restarted<p>");
       },
       error: function(data) {
-        console.log("Something wrong in the reset process!");
       }
     });
   });
 
-//Fetch the data in the form, run "sendHumanInfo" and hide the form 
+  //Fetch the data in the form, run "sendHumanInfo" and hide the form 
   $('#startForm').submit(function() {
            
             var humanName = $("#humanName").val();
             var humanClass = $("#charSelectClass").val();
-            console.log("newChar name and class: ", humanName, humanClass);
             $("#headerMessage").html("");
             sendHumanInfo(humanName, humanClass);
 
@@ -40,9 +37,8 @@ $(function() {
             return false;
   });
 
-//Send the name and the player-type chosen by the human to the db
+  //Send the name and the player-type chosen by the human to the db
   function sendHumanInfo(name, cl) {
-    console.log("1 sendHumanInfo log", name,cl);
     $.ajax({
       url: "create.php",
       dataType: "json",
@@ -51,7 +47,6 @@ $(function() {
         player_class: cl
       },
       success: function(data) {
-        console.log("Success! Name and class of sendHumanInfo success:", data);
         printHumanInfo(data);
       },
       error: function(data) {
@@ -72,88 +67,82 @@ $(function() {
     challengeOffer();
   }
 
-function challengeOffer() {
-  console.log("challengeofferCL");
-  $.ajax({
-      url: "challenge_pick.php",
-      dataType: "json",
-      data: {
-        challenge: 1,
-      },
-      success: function(data) {
-        $(".messageBox").append("<p>You either accept or change the challenge below! A random change will cost you 5 success-points.<br>"+
-                                "You are now offered to do this challenge: </p><br>"+
-                                "<h1>"+data["name"]+"</h1>"+
-                                 data["description"]+"<br>"+
-                                "<button class = 'acceptCh'>Accept</button><button class='randomCh'>Random change</button>");
-        console.log("Data from the success of challengeOffer: ", data);
-          
-      },
-      error: function(data) {
-        console.log("Data from the error of challengeOffer: ", data, data.responseText);
-      }
-  });
-}
-
-//When you accept the first challenge offer
-$("body").on('click', ".acceptCh", function() {
-  console.log("accepted challenge");
-  $(".messageBox").html("");
-  recieveItem();
-});
-
-//When you choose to change to another random challenge
-$("body").on('click', ".randomCh", function() {
-  console.log("random challange click");
-  $.ajax({
-      url: "challenge_pick.php",
-      dataType: "json",
-      data: {
-        challengeChange: 1,
-      },
-      success: function(data) {
-        $(".messageBox").html("<p>This change cost you 5 success-points. <br> Your new challange is: </p>" +
-                              "<h1>"+data["name"]+"</h1>"+
-                              "<p>",data["description"]+"</p><br>"
-                              );
-        console.log("Data from the success of challengeChange: ", data);
-        recieveItem();
-      },
-      error: function(data) {
-        console.log("Data from the error of challengeChange: ", data, data.responseText);
-      }
-  });
-});
-
-//Before every challenge, you recieve a random item
-function recieveItem() {
-   $('.messageBox').append("<p>If you had less than three items, you now recieved an item! Items adds on to some of your strengths! </p><br>");
-      $.ajax({
-        url: "item.php",
+  //Requests a random challenge and prints out challenge info and buttons
+  function challengeOffer() {
+    $.ajax({
+        url: "challenge_pick.php",
         dataType: "json",
         data: {
-          plusItem: 1
+          challenge: 1,
         },
         success: function(data) {
-          console.log("data of recieveItem success:", data);
-          if(data.hasOwnProperty("item_name")) {
-              for(var key in data) {
-                if(data.hasOwnProperty(key)) {
-                  $(".messageBox").append("<p>" + key + " : " +data[key]+"</p><br>");
-                }
-              }
-          }else {
-            $(".messageBox").append("<p>" + data + "</p><br>");
-          }
-          $(".messageBox").append("<button class='showEnemies'>Show Enemies</button>");
+          $(".messageBox").append("<p>You either accept or change the challenge below! A random change will cost you 5 success-points.<br>"+
+                                  "You are now offered to do this challenge: </p><br>"+
+                                  "<h1>"+data["name"]+"</h1>"+
+                                   data["description"]+"<br>"+
+                                  "<button class = 'acceptCh'>Accept</button><button class='randomCh'>Random change</button>");
         },
         error: function(data) {
-          console.log("Error in the recieveItem function", data.responseText);
+          console.log("Data from the error of challengeOffer: ", data, data.responseText);
         }
-      });
-}
+    });
+  }
 
-  //When clicked, the enemies data shows
+  //When you accept the first challenge offer
+  $("body").on('click', ".acceptCh", function() {
+    $(".messageBox").html("");
+    recieveItem();
+  });
+
+  //When you choose to change to random challenge
+  $("body").on('click', ".randomCh", function() {
+    $.ajax({
+        url: "challenge_pick.php",
+        dataType: "json",
+        data: {
+          challengeChange: 1,
+        },
+        success: function(data) {
+          $(".messageBox").html("<p>This change cost you 5 success-points. <br> Your new challange is: </p>" +
+                                "<h1>"+data["name"]+"</h1>"+
+                                "<p>",data["description"]+"</p><br>"
+                                );
+          recieveItem();
+        },
+        error: function(data) {
+          console.log("Data from the error of challengeChange: ", data, data.responseText);
+        }
+    });
+  });
+
+  //Before every challenge, you recieve a random item
+  function recieveItem() {
+     $('.messageBox').append("<p>If you had less than three items, you now recieved an item! Items adds on to some of your strengths! </p><br>");
+        $.ajax({
+          url: "item.php",
+          dataType: "json",
+          data: {
+            plusItem: 1
+          },
+          success: function(data) {
+            if(data.hasOwnProperty("item_name")) {
+                for(var key in data) {
+                  if(data.hasOwnProperty(key)) {
+                    $(".messageBox").append("<p>" + key + " : " +data[key]+"</p><br>");
+                  }
+                }
+            }else {
+              $(".messageBox").append("<p>" + data + "</p><br>");
+            }
+            $(".messageBox").append("<button class='showEnemies'>Show Enemies</button>");
+          },
+          error: function(data) {
+            console.log("Error in the recieveItem function", data.responseText);
+          }
+        });
+  }
+
+  //When this button is clicked, the printEnemiesData-function runs
   $("body").on('click', ".showEnemies", function() {
 
       $('.messageBox').html("");
@@ -165,16 +154,15 @@ function recieveItem() {
           enemies: 1
         },
         success: function(data) {
-          console.log("data of show enemies success:", data);
           printEnemiesData(data);
         },
         error: function(data) {
           console.log("Error in the show enemies function", data.responseText);
         }
       });
-      console.log("CL printEnemies");
   });
 
+  //this prints out all enemies data and buttons to the screen
   function printEnemiesData(data) {
     $(".messageBox").show();
     $('.messageBox').append("<p>These are your competitors: <p><br><br>");
@@ -190,6 +178,7 @@ function recieveItem() {
                               "<button id='chTogether'>Do challenge together with one competitor</button>");
   }
 
+  //When you click the button that chooses to compete alone
   $("body").on('click', "#chAlone", function() {
      $('.messageBox').html("");
      $.ajax({
@@ -199,7 +188,6 @@ function recieveItem() {
           DoChallengeAlone: 1
         },
         success: function(data) {
-          console.log("success data of on click challenge alone function ajax:", data);
           $(".messageBox").append("<p>",data," this challenge.</p><br>");
           currentStandings();
         },
@@ -209,6 +197,7 @@ function recieveItem() {
       });
   });
 
+    //When you click the button with the choice of teaming upp with a competitor
     $("body").on('click', "#chTogether", function() {
       $('.messageBox').html("");
       $.ajax({
@@ -218,7 +207,6 @@ function recieveItem() {
           DoChallengeTogether: 1
         },
         success: function(data) {
-          console.log("success data of on click challenge together function ajax:" + data + data.responseText);
           $('.messageBox').append(data);
           currentStandings();
         },
@@ -228,6 +216,7 @@ function recieveItem() {
       });
     });
 
+    //Requests current standings in the game, and prints it out
     function currentStandings() {
       $.ajax({
         url: "create.php",
@@ -236,7 +225,6 @@ function recieveItem() {
           currentStandings: 1
         },
         success: function(data) {
-          console.log("success data of currentStandings function ajax:",data);
           $(".messageBox").append("<h1>Current standings:</h1>");
           for(var key in data) {
             if(data.hasOwnProperty(key)) {
@@ -257,7 +245,7 @@ function recieveItem() {
       });
     }
 
-    //If you click the 'On to the next challenge'-button
+    //If you click the 'On to the next challenge'-button - run challengeOffer();
     $("body").on('click', "#nextChTrigger", function() {
       $(".messageBox").html("");
       challengeOffer();

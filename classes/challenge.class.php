@@ -5,22 +5,11 @@
     protected $name;
     protected $description;
     public $skills;
-/*    
-	  protected $handling = 0;
-	  protected $speed = 0;
-	  protected $persistance = 0;
-  	protected $hands_on = 0;
-  	protected $id = 0;*/
 
   	public function __construct($name, $challenge_data) {
       $this->name = $name;
       $this->skills = $challenge_data["skills"];
       $this->description = $challenge_data["description"];
-      /*$this->handling = $handling;
-      $this->speed = $speed;
-      $this->persistance = $persistance;
-      $this->hands_on = $hands_on;
-      $this->id = $id;*/
     }
 
     public function get_skills() {
@@ -55,7 +44,7 @@
       return $this->description;
     }
 
-    //matching a player to $this challenges strength values
+    //matching a player to $this challenge's strength values
     public function howGoodAMatch($person){
     //total points a person has
     $personSum = 0;
@@ -69,29 +58,12 @@
       //here we check how many points the person has in each strength
       $personHas = $person->{$skill}; 
 
-      //not for me
-      // //check if a person has any tools
-      // if (count($person->tools) > 0) {
-      //   //if they do, go through them
-      //   for ($i = 0; $i < count($person->tools); $i++) {
-      //     //and for each skill the tool has
-      //     foreach ($person->tools[$i]->skills as $toolSkill => $value) {
-      //       //if a toolSkill matches the skill we are currently calculating
-      //       if ($toolSkill == $skill) {
-      //         //add the toolSkill points 
-      //         $has += $value;
-      //       }
-      //     }
-      //   } 
-      // }
-
-      //if a person has more points than  the ideal, "round down" to ideal point value(to preserve our percentage)
+      //if a person has more points than  the ideal, "round down" to ideal point value
       //else count the skillpoints a person has
       $personSum += $personHas > $needed ? $needed : $personHas;
       $idealSum += $needed;
     }
-    //returns f.e. 0,56
-    //return the percentage of skill points the person have
+    //return the percentage of the ideal skill points the person have, f.e. 0,56
     return $personSum/$idealSum;
   }
 

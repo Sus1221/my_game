@@ -7,6 +7,5 @@ class Grandparent extends Character {
 	protected $persistance = 40;
 	protected $hands_on = 70;
 
-	
 }
 
