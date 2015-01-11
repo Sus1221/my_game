@@ -115,7 +115,7 @@ if (count($ds->items) === 0) {
 
 /*echo(count($ds->human->tools));*/
 
-//If ajax calls for a new human-item
+//If ajax calls for adding a new human-item
 if (isset($_REQUEST["plusItem"])) {
 	$human = &$ds->human[0];
 	
@@ -134,10 +134,10 @@ if (isset($_REQUEST["plusItem"])) {
 
     	//Fetches the values and name of the random item
     	$handlingI = $random_item->skills["handling"];
-    	$speedI = $ds->items[$rand]->skills["speed"];
-    	$persistanceI = $ds->items[$rand]->skills["persistance"];
-    	$hands_onI = $ds->items[$rand]->skills["hands_on"];
-    	$item_name = $ds->items[$rand]->description;
+    	$speedI = $random_item->skills["speed"];
+    	$persistanceI = $random_item->skills["persistance"];
+    	$hands_onI = $random_item->skills["hands_on"];
+    	$item_name = $random_item->description;
 
     	//creating an array that sums strengths and contains data to send back via ajax
 		$human_val_added = array(
@@ -158,42 +158,7 @@ if (isset($_REQUEST["plusItem"])) {
 
 } 
 
-function minus_human_item() {
-	$human = &$ds->human[0];
-	
-	//if the human has any tools
-	if(count($human->tools) > 0) {
-    	//$rand is a random number between 0 and number of items in human->tools array minus 1
-    	$rand = rand(0,count($human->tools)-1);
-    	//select a random item name from human tools array
-    	$random_item = $human->tools[$rand];
-    	//remove the name from human tools
-    	array_splice($human->tools, $rand-1, 1);
-    	//Find item where description = name of item just removed from human-tools
-    	$db_item_right_name = array_search($random_item, $ds->items);
 
-		
-		//subtracting item's strength-values to subtract from human strengths
-    	$handlingI = $db_item_right_name["handling"];
-    	$speedI = $db_item_right_name["speed"];
-    	$persistanceI = $db_item_right_name["persistance"];
-    	$hands_onI = $db_item_right_name["hands_on"];
-    
-    	
-    	//creating an array that subtracts the values of the item from human strengths
-		$human_val_added = array(
-			"name" => $human->name,
-			"handling" => ($human->handling -= $handlingI), 
-			"speed" => ($human->speed -= $speedI), 
-			"persistance" => ($human->persistance -= $persistanceI),
-			"hands_on" => ($human->hands_on -= $hands_onI),
-			"success" => $human->success,
-			"tools" => $human->tools,
-		);
-	}
-	return $human_val_added;
-
-}
 
 //////////////////////////////////////////////////
 // $human = &$ds->human[0];

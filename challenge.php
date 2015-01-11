@@ -16,12 +16,12 @@ $ds = new DBObjectSaver(array(
  if (isset($_REQUEST["DoChallengeAlone"])) {
  	//run function howGoodAMatch with human,bot1 and bot 2 on present challenge
  	$raw_human_score = $ds->present_challenge[0]->howGoodAMatch($ds->human[0]);
- 	$human_result = round($raw_human_score,3);
+ 	$human_result = round($raw_human_score,4);
 
  	//if bot1 is alive
  	if($ds->bots[0]->success > 0) {
 	 	$raw_bot1_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[0]);
-	 	$bot1_result = round($raw_bot1_score,3);
+	 	$bot1_result = round($raw_bot1_score,4);
 	//if bot1 is dead its challenge-result is always 0
 	}else {
 		$bot1_result = 0;
@@ -29,7 +29,7 @@ $ds = new DBObjectSaver(array(
 	//if bot2 is alive
  	if($ds->bots[1]->success > 0) {
  		$raw_bot2_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[1]);
- 		$bot2_result = round($raw_bot2_score,3);
+ 		$bot2_result = round($raw_bot2_score,4);
  	//if bot 2 is the dead its challenge-result is always 0
  	}else {
  		$bot2_result = 0;
@@ -37,33 +37,39 @@ $ds = new DBObjectSaver(array(
  	//if human wins
  	if ($human_result > $bot1_result && $human_result > $bot2_result) {
  		$ds->human[0]->success +=15;
+ 		//and if bot1 comes in second
  		if($bot1_result > $bot2_result) {
  			$ds->bots[1]->success -=5;
+ 		//or if bot2 comes in second
  		}else{
  			$ds->bots[0]->success -=5;
  		}
  		echo(json_encode("You won"));
  	//if human comes in second
  	}else if($human_result > $bot1_result || $human_result > $bot2_result) {
- 		//minus_human_item();
+ 		minus_human_item();
+ 		//and if bot 1 wins
  		if($bot1_result > $bot2_result) {
  			$ds->bots[0]->success +=15;
  			$ds->bots[1]->success -=5;
+ 		//or if bot 2 wins
  		}else {
  			$ds->bots[0]->success -=5;
  			$ds->bots[1]->success +=15;
  		}
- 		echo(json_encode("You came in second in "));
+ 		echo(json_encode("You came in second and lost an item in "));
  	//if human comes in last
  	}else {
+ 		minus_human_item();
  		$ds->human[0]->success -=5;
+ 		//and if bot 1 wins
  		if($bot1_result > $bot2_result) {
  			$ds->bots[0]->success +=15;
+ 		//or if bot 2 wins
  		}else {
  			$ds->bots[1]->success +=15;
  		}
- 		//minus_human_item();
- 		echo(json_encode("You lost"));
+ 		echo(json_encode("You lost an item and lost "));
  	}
 }
 //var_dump($ds->present_challenge[0]);
@@ -77,10 +83,11 @@ if (isset($_REQUEST["DoChallengeTogether"])) {
  	
  	//Make the team and the lone bot run the challenge
  	$raw_lone_bot_score = $ds->present_challenge[0]->howGoodAMatch($ds->bots[1]);
- 	$lone_bot_result = round($raw_lone_bot_score,3);
+ 	//Round off to 4 decimals
+ 	$lone_bot_result = round($raw_lone_bot_score,4);
  	
  	$raw_team_score = $ds->present_challenge[0]->howGoodAMatch($ds->team[0]);
- 	$team_result = round($raw_team_score,3);
+ 	$team_result = round($raw_team_score,4);
  	
  	//if team wins
  	if($team_result > $lone_bot_result) {
@@ -100,7 +107,42 @@ if (isset($_REQUEST["DoChallengeTogether"])) {
  	unset($ds->team);
 }
 
+function minus_human_item() {
+	$human = &$ds->human[0];
+	
+	//if the human has any tools
+	if(count($human->tools) > 0) {
+    	//$rand is a random number between 0 and number of items in human->tools array minus 1
+    	$rand = rand(0,count($human->tools)-1);
+    	//select a random item name from human tools array
+    	$random_item = $human->tools[$rand];
+    	//remove the name from human tools
+    	array_splice($human->tools, $rand-1, 1);
+    	
+    	//Find item where description = name of item just removed from human-tools
+    	$db_item_right_name = array_search($random_item, $ds->items);
 
+		
+		//fetching item's strength-values in variables to subtract from human strengths
+    	$handlingI = $db_item_right_name["handling"];
+    	$speedI = $db_item_right_name["speed"];
+    	$persistanceI = $db_item_right_name["persistance"];
+    	$hands_onI = $db_item_right_name["hands_on"];
+    
+    	
+    	//subtract removed item-strength-values from human-stength-values
+		
+			$human->handling -= $handlingI; 
+			$human->speed -= $speedI;
+			$human->persistance -= $persistanceI;
+			$human->hands_on -= $hands_onI;
+
+	}else {
+		exit;
+	}
+	// return $human_val_added;
+
+}
 //Code below prints the result number + rounded number to this php-page
 
 // echo($ds->present_challenge[0]->howGoodAMatch($ds->human[0]));
