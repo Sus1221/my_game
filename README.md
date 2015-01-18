@@ -1,5 +1,8 @@
 my_game
 =======
+
+Assignment in my course Object Oriented Programming due january 11th.
+
 Short description of php files:
 
 create.php - creates human player, 2 bots, array of bots-info, array of current-standings-data
